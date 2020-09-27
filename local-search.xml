@@ -4,11 +4,63 @@
   
   
   <entry>
+    <title>k度匿名的算法研究</title>
+    <link href="/2020/09/27/k%E5%BA%A6%E5%8C%BF%E5%90%8D%E7%9A%84%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/"/>
+    <url>/2020/09/27/k%E5%BA%A6%E5%8C%BF%E5%90%8D%E7%9A%84%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>复杂网络重叠社区算法研究</title>
+    <link href="/2020/09/27/%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E9%87%8D%E5%8F%A0%E7%A4%BE%E5%8C%BA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/"/>
+    <url>/2020/09/27/%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E9%87%8D%E5%8F%A0%E7%A4%BE%E5%8C%BA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>networkx复杂网络基本操作</title>
+    <link href="/2020/09/27/networkx%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <url>/2020/09/27/networkx%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>大数据课程设计-spark环境搭建以及实现决策树学习</title>
+    <link href="/2020/09/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%86%B3%E7%AD%96%E6%A0%91%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2020/09/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%86%B3%E7%AD%96%E6%A0%91%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<p>学期初大数据课程老师要求仿照林子雨老师的教材使用spark编写程序，本想随便画两张图草草了事，但最后还是认真地做了。<br>有趣的是答辩的时候，有四组的作品和林子雨老师教材的例子一模一样，这大概就是糊弄学的典范吧。</p><h1 id="大数据课程设计-spark环境搭建以及实现决策树学习"><a href="#大数据课程设计-spark环境搭建以及实现决策树学习" class="headerlink" title="大数据课程设计-spark环境搭建以及实现决策树学习"></a>大数据课程设计-spark环境搭建以及实现决策树学习</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>使用manjaro、java 1.8、hadoop 2.9.2、 python 3.8<br>以及安装了mysql，此处不作展示<br><img src="http://i2.tiimg.com/727535/c365b9369065e880.png" alt="Python和Spark版本信息" title="环境信息.1"><br><img src="http://i2.tiimg.com/727535/b675ac7983d26423.png" alt="JDK和Hadoop版本信息" title="环境信息.2"><br>spark可以独立于hadoop运行（hadoop配置是真的麻烦），并且本课设采用的是pyspark编程，pyspark需要python3.x以上的版本</p><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="http://i1.fuimg.com/727535/4c77207b47be0bb1.png" alt="数据集" title="数据集.1"><br>数据集采用国民经济核算季度数据，CPI为国家人均消费指数，指数越高说明消费水平越高，接下来将使用pyspark的ml模块的决策树模型进行训练和测试</p><h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-string">    导入必要的模块</span><span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession<span class="hljs-keyword">from</span> pyspark.ml.feature <span class="hljs-keyword">import</span> VectorAssembler<span class="hljs-keyword">from</span> pyspark.ml.regression <span class="hljs-keyword">import</span> DecisionTreeRegressor<span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator</code></pre><p>SparkSession 是 spark2.x 引入的新概念，SparkSession 为用户提供统一的切入点，字面理解是创建会话，或者连接 spark<br>VectorAssembler 将多列数据转换为单列的向量列并统一命名，完成特征向量提取<br>DecisionTreeRegressor 为决策树模型模块，包含了初始化训练测试等方法<br>RegressionEvaluator 用于对模型进行评估</p><pre><code class="hljs ini"><span class="hljs-attr">spark</span> = SparkSession.builder.appName(<span class="hljs-string">&#x27;learn_regression&#x27;</span>).master(<span class="hljs-string">&#x27;local[1]&#x27;</span>).getOrCreate()<span class="hljs-attr">dataset_path</span> = <span class="hljs-string">&#x27;./data/datat.csv&#x27;</span><span class="hljs-attr">df</span> = spark.read.csv(dataset_path)</code></pre><p>读取数据集并且创建本地spark会话</p><pre><code class="hljs reasonml">df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c1</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c1</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c2</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c2</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c3</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c3</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c4</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c4</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c5</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c5</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c6</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c6</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c7</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c7</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c8</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c8</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c9</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c9</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c10</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c10</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c11</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c11</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c12</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c12</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c13</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c13</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df = df.<span class="hljs-keyword">with</span><span class="hljs-constructor">Column(&#x27;<span class="hljs-params">_c14</span>&#x27;,<span class="hljs-params">df</span>.<span class="hljs-params">_c14</span>.<span class="hljs-params">astype</span>(<span class="hljs-string">&quot;float&quot;</span>)</span>)df.show<span class="hljs-literal">()</span></code></pre><p>将数据的每一列转换成float浮点数类型</p><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">feature_converter</span>(<span class="hljs-params">df</span>):</span>    <span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-string">        使用feature模块的VectorAssembler将特征值提取并合并</span><span class="hljs-string">    &quot;&quot;&quot;</span>    vecAss = VectorAssembler(inputCols = df.columns[<span class="hljs-number">1</span>:], outputCol= <span class="hljs-string">&#x27;features&#x27;</span>)    df_va = vecAss.transform(df)    <span class="hljs-keyword">return</span> df_va</code></pre><p>定义一个特征提取函数，将使用VectorAssembler提取特征值并合并重命名为features</p><pre><code class="hljs apache"><span class="hljs-attribute">train_data</span>, test_data = feature_converter(df).select(&#x27;features&#x27;,&#x27;_c<span class="hljs-number">14</span>&#x27;).randomSplit([<span class="hljs-number">7</span>.<span class="hljs-number">0</span>,<span class="hljs-number">3</span>.<span class="hljs-number">0</span>], <span class="hljs-number">101</span>)</code></pre><p>此处C_14为数据集中的CPI，特征提取完成后按照7-3划分训练集和测试集</p><h2 id="训练与评估"><a href="#训练与评估" class="headerlink" title="训练与评估"></a>训练与评估</h2><pre><code class="hljs routeros"><span class="hljs-comment"># 创建一个决策树对象</span>dt = DecisionTreeRegressor(<span class="hljs-attribute">maxDepth</span>=5, <span class="hljs-attribute">varianceCol</span>=<span class="hljs-string">&quot;variance&quot;</span>, <span class="hljs-attribute">labelCol</span>=<span class="hljs-string">&quot;_c14&quot;</span>)<span class="hljs-comment"># 使用训练集数据 进行训练</span>dt_model = dt.fit(train_data)</code></pre><p>使用ml模块的随机森林模型进行训练</p><pre><code class="hljs reasonml">dt_evaluator = <span class="hljs-constructor">RegressionEvaluator(<span class="hljs-params">labelCol</span>=&#x27;<span class="hljs-params">_c14</span>&#x27;,<span class="hljs-params">metricName</span>=<span class="hljs-string">&quot;rmse&quot;</span>,<span class="hljs-params">predictionCol</span>=&#x27;<span class="hljs-params">prediction</span>&#x27;)</span>rmse = dt_evaluator.evaluate(result)print(<span class="hljs-string">&quot;均方根的误差为：&quot;</span>,rmse)</code></pre><p>对模型进行评估，结果如下<br><img src="http://i2.tiimg.com/727535/dad143cedd82519b.png" alt="评估结果" title="评估结果"></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>helloworld</title>
     <link href="/2020/09/27/helloworld/"/>
     <url>/2020/09/27/helloworld/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>welcome to my new blog, I will record my work here.</p>]]></content>
     
     
     
