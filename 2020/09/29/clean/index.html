@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>networkx复杂网络基本操作 - Wlzzzz_blog</title>
+  <title>clean - Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-27 12:41" pubdate>
-        September 27, 2020 pm
+      <time datetime="2020-09-29 08:29" pubdate>
+        September 29, 2020 am
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      410 字
+      0 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      1
        分钟
     </span>
   
@@ -217,68 +217,15 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">networkx复杂网络基本操作</h1>
+            <h1 style="display: none">clean</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>从寒假开始到疫情结束一直在帮研究生搞复杂网络的算法，因此学习了networkx用于写算法，在这篇博文下整理一些networkx的基本操作</p>
-<h1 id="networkx基本操作"><a href="#networkx基本操作" class="headerlink" title="networkx基本操作"></a>networkx基本操作</h1><h2 id="导入数据集"><a href="#导入数据集" class="headerlink" title="导入数据集"></a>导入数据集</h2><p>导入.gml格式的数据集</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>read<span class="hljs-constructor">_gml()</span></code></pre>
-<p>导入.txt格式的数据集</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>read<span class="hljs-constructor">_edgelist()</span></code></pre>
-<p>导入karate_club数据集（networkx自带）</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>karate<span class="hljs-constructor">_club_graph()</span></code></pre>
-
-<h2 id="点和边的操作"><a href="#点和边的操作" class="headerlink" title="点和边的操作"></a>点和边的操作</h2><p>输出点的数量</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>number<span class="hljs-constructor">_of_nodes()</span></code></pre>
-<p>输出边的数量</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>number<span class="hljs-constructor">_of_edges()</span></code></pre>
-<p>输出全部点的信息</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>nodes<span class="hljs-literal">()</span></code></pre>
-<p>输出全部边的信息</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>edges<span class="hljs-literal">()</span></code></pre>
-<p>在图中添加一个点</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>add<span class="hljs-constructor">_node(34)</span></code></pre>
-<p>在图中添加一条边</p>
-<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">G</span>.</span></span>add<span class="hljs-constructor">_edge(1,3)</span></code></pre>
-<p>输出某个点的邻居节点</p>
-<pre><code class="hljs angelscript">G[<span class="hljs-number">34</span>]</code></pre>
-<p>使用遍历输出所有点的邻居数量</p>
-<pre><code class="hljs matlab"><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> in G.nodes():
-  print(<span class="hljs-built_in">i</span>,<span class="hljs-string">&#x27;的数量为&#x27;</span>,len(G[<span class="hljs-built_in">i</span>]))</code></pre>
-<h2 id="画图操作"><a href="#画图操作" class="headerlink" title="画图操作"></a>画图操作</h2><p>networkx画图操作依托于matplotlib，因此matplotlib设置的参数对nx.draw()都有效</p>
-<pre><code class="hljs angelscript"><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot as pyplot
-plt.figure(figsize=(<span class="hljs-number">10</span>,<span class="hljs-number">8</span>))# 定义图片的大小
-nx.draw(G)
-plt.show()</code></pre>
-<p>如下图画出了karate的拓扑图<br><img src="http://i1.fuimg.com/727535/bc6dfba58eb1265a.png" srcset="/img/loading.gif" alt="karate" title="karate拓扑结构.1"></p>
-<pre><code class="hljs 1c">nx.draw(G,node_color=&#x27;r&#x27;,edge_color=&#x27;b&#x27;)<span class="hljs-meta">#指定点和边的颜色</span></code></pre>
-<p><img src="http://i1.fuimg.com/727535/40e48e4e44925b81.png" srcset="/img/loading.gif" alt="karate" title="karate拓扑结构.2"></p>
-<pre><code class="hljs nix"><span class="hljs-comment"># 使用Kernighan–Lin算法将图划分为两个块</span>
-<span class="hljs-attr">a=kernighan_lin_bisection(G)#</span> 运行算法
-<span class="hljs-attr">pos</span> = nx.spring_layout(G)<span class="hljs-comment"># 对节点布局进行美化</span>
-<span class="hljs-comment"># 分别画出两组社区的节点分布</span>
-nx.draw(G,<span class="hljs-attr">pos</span> = pos, <span class="hljs-attr">nodelist</span> = a[<span class="hljs-number">0</span>], <span class="hljs-attr">node_color</span> = &#x27;blue&#x27;,<span class="hljs-attr">node_size=100)</span>
-nx.draw(G,<span class="hljs-attr">pos</span> = pos, <span class="hljs-attr">nodelist</span> = a[<span class="hljs-number">1</span>], <span class="hljs-attr">node_color</span> = &#x27;red&#x27;,<span class="hljs-attr">node_size=100)</span></code></pre>
-<p><img src="http://i2.tiimg.com/727535/f7135e3a3a576499.png" srcset="/img/loading.gif" alt="karate" title="karate拓扑结构.3"></p>
-<h2 id="生成其他特殊图"><a href="#生成其他特殊图" class="headerlink" title="生成其他特殊图"></a>生成其他特殊图</h2><pre><code class="hljs ini"><span class="hljs-attr">G</span> = nx.scale_free_graph(<span class="hljs-number">100</span>)<span class="hljs-comment"># 生成无标度网络</span>
-<span class="hljs-attr">H</span>=nx.watts_strogatz_graph(<span class="hljs-number">50</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0.3</span>)<span class="hljs-comment"># 生成小世界</span></code></pre>
-
-<h2 id="导出到-gml格式"><a href="#导出到-gml格式" class="headerlink" title="导出到.gml格式"></a>导出到.gml格式</h2><pre><code class="hljs less"><span class="hljs-selector-tag">nx</span><span class="hljs-selector-class">.write_gml</span>(G,<span class="hljs-string">&#x27;./9.txt&#x27;</span>)</code></pre>
-
-<h2 id="其他详细方法参考networkx文档"><a href="#其他详细方法参考networkx文档" class="headerlink" title="其他详细方法参考networkx文档"></a>其他详细方法参考networkx文档</h2><p><a target="_blank" rel="noopener" href="https://www.osgeo.cn/networkx/" title="networkx文档">networkx文档</a></p>
-
+              
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E4%BD%9C/">工作</a>
-                    
-                  </div>
                 
               </div>
               
@@ -289,9 +236,9 @@ nx.draw(G,<span class="hljs-attr">pos</span> = pos, <span class="hljs-attr">node
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/29/clean/">
+                      <a href="/2020/09/29/2020-9-29/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">clean</span>
+                        <span class="hidden-mobile">2020.9.29</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -299,8 +246,8 @@ nx.draw(G,<span class="hljs-attr">pos</span> = pos, <span class="hljs-attr">node
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1-spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%86%B3%E7%AD%96%E6%A0%91%E5%AD%A6%E4%B9%A0/">
-                        <span class="hidden-mobile">大数据课程设计-spark环境搭建以及实现决策树学习</span>
+                      <a href="/2020/09/27/networkx%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">networkx复杂网络基本操作</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -443,7 +390,7 @@ nx.draw(G,<span class="hljs-attr">pos</span> = pos, <span class="hljs-attr">node
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "networkx复杂网络基本操作&nbsp;",
+        "clean&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
