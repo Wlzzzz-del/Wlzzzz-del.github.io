@@ -221,8 +221,8 @@
             
             <div class="markdown-body" id="post-body">
               <p>学期初大数据课程老师要求仿照林子雨老师的教材使用spark编写程序，本想随便画两张图草草了事，但最后还是认真地做了。<br>有趣的是答辩的时候，有四组的作品和林子雨老师教材的例子一模一样，这大概就是糊弄学的典范吧。</p>
-<h1 id="大数据课程设计-spark环境搭建以及实现决策树学习"><a href="#大数据课程设计-spark环境搭建以及实现决策树学习" class="headerlink" title="大数据课程设计-spark环境搭建以及实现决策树学习"></a>大数据课程设计-spark环境搭建以及实现决策树学习</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>使用manjaro、java 1.8、hadoop 2.9.2、 python 3.8<br>以及安装了mysql，此处不作展示<br><img src="http://i2.tiimg.com/727535/c365b9369065e880.png" srcset="/img/loading.gif" alt="Python和Spark版本信息" title="环境信息.1"><br><img src="http://i2.tiimg.com/727535/b675ac7983d26423.png" srcset="/img/loading.gif" alt="JDK和Hadoop版本信息" title="环境信息.2"><br>spark可以独立于hadoop运行（hadoop配置是真的麻烦），并且本课设采用的是pyspark编程，pyspark需要python3.x以上的版本</p>
-<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="http://i1.fuimg.com/727535/4c77207b47be0bb1.png" srcset="/img/loading.gif" alt="数据集" title="数据集.1"><br>数据集采用国民经济核算季度数据，CPI为国家人均消费指数，指数越高说明消费水平越高，接下来将使用pyspark的ml模块的决策树模型进行训练和测试</p>
+<h1 id="大数据课程设计-spark环境搭建以及实现决策树学习"><a href="#大数据课程设计-spark环境搭建以及实现决策树学习" class="headerlink" title="大数据课程设计-spark环境搭建以及实现决策树学习"></a>大数据课程设计-spark环境搭建以及实现决策树学习</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>使用manjaro、java 1.8、hadoop 2.9.2、 python 3.8<br>以及安装了mysql，此处不作展示<br><img src="https://i.loli.net/2020/10/05/pNY51TcBw49uHol.png" srcset="/img/loading.gif" alt="Python和Spark版本信息" title="环境信息.1"><br><img src="https://i.loli.net/2020/10/05/91tSrjXaxN6zOpA.png" srcset="/img/loading.gif" alt="JDK和Hadoop版本信息" title="环境信息.2"><br>spark可以独立于hadoop运行（hadoop配置是真的麻烦），并且本课设采用的是pyspark编程，pyspark需要python3.x以上的版本</p>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="https://i.loli.net/2020/10/05/qLHkJr5EVn32Yly.png" srcset="/img/loading.gif" alt="数据集" title="数据集.1"><br>数据集采用国民经济核算季度数据，CPI为国家人均消费指数，指数越高说明消费水平越高，接下来将使用pyspark的ml模块的决策树模型进行训练和测试</p>
 <h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    导入必要的模块</span>
 <span class="hljs-string">&quot;&quot;&quot;</span>
@@ -269,7 +269,7 @@ dt_model = dt.fit(train_data)</code></pre>
 <pre><code class="hljs reasonml">dt_evaluator = <span class="hljs-constructor">RegressionEvaluator(<span class="hljs-params">labelCol</span>=&#x27;<span class="hljs-params">_c14</span>&#x27;,<span class="hljs-params">metricName</span>=<span class="hljs-string">&quot;rmse&quot;</span>,<span class="hljs-params">predictionCol</span>=&#x27;<span class="hljs-params">prediction</span>&#x27;)</span>
 rmse = dt_evaluator.evaluate(result)
 print(<span class="hljs-string">&quot;均方根的误差为：&quot;</span>,rmse)</code></pre>
-<p>对模型进行评估，结果如下<br><img src="http://i2.tiimg.com/727535/dad143cedd82519b.png" srcset="/img/loading.gif" alt="评估结果" title="评估结果"></p>
+<p>对模型进行评估，结果如下<br><img src="https://i.loli.net/2020/10/05/z4XNBOV1PhD3wC6.png" srcset="/img/loading.gif" alt="评估结果" title="评估结果"></p>
 
             </div>
             <hr>
