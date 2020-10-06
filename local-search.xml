@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>计算机组成原理note</title>
+    <link href="/2020/10/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86note/"/>
+    <url>/2020/10/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86note/</url>
+    
+    <content type="html"><![CDATA[<h2 id="数据编码与表示"><a href="#数据编码与表示" class="headerlink" title="数据编码与表示"></a>数据编码与表示</h2><h3 id="需要在计算机中表示的对象"><a href="#需要在计算机中表示的对象" class="headerlink" title="需要在计算机中表示的对象"></a>需要在计算机中表示的对象</h3><ul><li><p>程序、整数、浮点数、字符串、逻辑值</p></li><li><p>通过编码表示</p><h3 id="表示方式"><a href="#表示方式" class="headerlink" title="表示方式"></a>表示方式</h3></li><li><p>用数字电路的两个状态表示，存放在机器字中</p></li><li><p>由上一层的抽象计算机来识别不同的内容</p><blockquote><p>当数据已经固定位数为n了，最多只能有2的n次方个不同的组合，2的n次方个组合显然不能够满足不同的表示方法，因此计算机引入了语义和上下文<br>根据不同的上下文，同一个二进制组合可以表示成不同的对象<br>并且由上一层抽象计算机对其进行识别</p></blockquote><h3 id="编码原则"><a href="#编码原则" class="headerlink" title="编码原则"></a>编码原则</h3></li><li><p>少量简单的基本符号</p></li><li><p>一定的规则</p></li><li><p>表示大量复杂的信息</p></li><li><p>方便使用</p><h3 id="编码表示"><a href="#编码表示" class="headerlink" title="编码表示"></a>编码表示</h3></li><li><p>基本元素</p><ul><li>0、1两个基本符号</li></ul></li><li><p>字符</p><ul><li><p>26个字母=&gt;5位</p></li><li><p>大/小写 + 其他符号 =&gt;7bits(in 8)</p></li><li><p>世界上其它语言的文字 =&gt;16 bits(unicode)</p><ul><li><p>无符号整数</p></li><li><p>逻辑值</p></li><li><p>0 -&gt;False</p></li><li><p>1 -&gt;True</p></li><li><p>颜色</p></li><li><p>位置/地址/指令</p></li></ul></li></ul></li></ul><h3 id="逻辑型数据"><a href="#逻辑型数据" class="headerlink" title="逻辑型数据"></a>逻辑型数据</h3><h4 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h4><p> 1、0</p><h4 id="数据运算"><a href="#数据运算" class="headerlink" title="数据运算"></a>数据运算</h4><p> 与、或、非</p><h3 id="字符型数据"><a href="#字符型数据" class="headerlink" title="字符型数据"></a>字符型数据</h3><ul><li><p>重要的人机界面</p><ul><li>由符号则称</li><li>为每个符号进行编码，<strong>由输入/输出设备进行转换</strong></li><li>一般以字符串的形式在计算机存储器中存放</li></ul></li><li><p>字符集编码标准</p><ul><li><p>计算机之间进行信息交互的基础</p><ul><li>ASCII</li><li>UNICODE</li><li>UTF-8<h4 id="ASCII字符编码"><a href="#ASCII字符编码" class="headerlink" title="ASCII字符编码"></a>ASCII字符编码</h4><ul><li>American Standard Code for Information Interchange</li><li>采用7位二进制编码，占用一个字节</li><li>表示128个西文字符<h4 id="UNICODE编码"><a href="#UNICODE编码" class="headerlink" title="UNICODE编码"></a>UNICODE编码</h4></li><li>使用16位表示一个字符，可以表示65536个字符</li><li>将整个编码空间划分为块，每块为16的整数倍，按块进行分配</li><li>保留6400个码点供本地化使用</li><li>依然无法覆盖所有字符<h4 id="UTF-8编码"><a href="#UTF-8编码" class="headerlink" title="UTF-8编码"></a>UTF-8编码</h4></li><li><strong>变长字符编码</strong>，提高存储空间利用率</li><li>字符长度由首字节确定</li><li>字符首字节外，均以‘10’开始，可自同步</li><li>可扩展性强</li><li>成为互联网上占统治地位的字符集<h4 id="数值型数据表示"><a href="#数值型数据表示" class="headerlink" title="数值型数据表示"></a>数值型数据表示</h4></li><li>定点数</li></ul></li></ul><p>-小数点位置固定</p><ul><li>整数</li><li>定点小数</li><li>浮点数<h3 id="数值范围和数据精度"><a href="#数值范围和数据精度" class="headerlink" title="数值范围和数据精度"></a>数值范围和数据精度</h3></li><li>数值范围<blockquote><p>数值范围是指一种类型的数据所能表示的最大值和最小值</p></blockquote></li><li>数据精度<blockquote><p>实数所能给出的有效数字位数。对浮点数，精度不够会造成误差</p></blockquote></li></ul></li></ul></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>linux下搭建v2ray科学上网</title>
     <link href="/2020/10/01/linux%E4%B8%8B%E6%90%AD%E5%BB%BAv2ray%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     <url>/2020/10/01/linux%E4%B8%8B%E6%90%AD%E5%BB%BAv2ray%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</url>
