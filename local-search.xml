@@ -4,6 +4,38 @@
   
   
   <entry>
+    <title>复杂网络相关研究</title>
+    <link href="/2020/10/08/%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E7%A0%94%E7%A9%B6/"/>
+    <url>/2020/10/08/%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E7%A0%94%E7%A9%B6/</url>
+    
+    <content type="html"><![CDATA[<p>#复杂网络的一般性质</p><h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>邻接矩阵（Adjacency Matrix）是表示顶点之间相邻关系的矩阵。</p><p>矩阵中每一行代表一个点，行a即为点a，每一列代表某一行的点所指向的点，矩阵的每一个（小格）表示一条边。图中的所有边（指向性的箭头）带有权值，通常约定权值为0的边为不存在的边。</p><h2 id="关联矩阵"><a href="#关联矩阵" class="headerlink" title="关联矩阵"></a>关联矩阵</h2><p>关联矩阵（incidence matrix）是显示两类对象之间关系的矩阵。</p><p>矩阵中每一行代表一个点，行a即为点a，每一列代表某一条边，矩阵的每一个小格表示该点和边之间有连接关系。1则代表相连，0则代表不相连。</p><h2 id="拉普拉斯矩阵"><a href="#拉普拉斯矩阵" class="headerlink" title="拉普拉斯矩阵"></a>拉普拉斯矩阵</h2><p>拉普拉斯矩阵（Laplacian matrix）也称调和矩阵，是表示拉普拉斯算子的离散化，用矩阵来表示图。</p><p>矩阵中的每一行代表一个点，行a即为点a，每一列代表另一个点b，以下面三种情况进行判断赋值：</p><p>如果a = b，则该小格的值为deg(a)，即该点的度.</p><p>如果a != b,但a和b相连，则该小格的值为-1.</p><p>其他情况，改小格值为0.</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>工作</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>编译原理note</title>
+    <link href="/2020/10/08/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86note/"/>
+    <url>/2020/10/08/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86note/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>计算机组成原理note</title>
     <link href="/2020/10/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86note/"/>
     <url>/2020/10/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86note/</url>
