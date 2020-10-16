@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>汉明码编码note - Wlzzzz_blog</title>
+  <title>避免眼高手低的方法 - Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-13 21:58" pubdate>
-        October 13, 2020 pm
+      <time datetime="2020-10-16 09:55" pubdate>
+        October 16, 2020 am
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      708 字
+      154 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      1
        分钟
     </span>
   
@@ -217,47 +217,17 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">汉明码编码note</h1>
+            <h1 style="display: none">避免眼高手低的方法</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>最近在学习计算机组成原理，看了bilibili清华的课程，关于汉明码老师<br>只是简单地带过，因此我又研究了一下这一神奇的编码原理，不得不感叹汉明的聪明才智！</p>
-<h1 id="编码目的"><a href="#编码目的" class="headerlink" title="编码目的"></a>编码目的</h1><p>当传输数据时，有各种原因可能会使数据出错，导致高层程序无法运行，这时如果我们采用一种编码方式能够检测错误<br>并且纠正错误，就能在底层解决这一问题，使得高层程序能正确运行</p>
-<h1 id="检错原理"><a href="#检错原理" class="headerlink" title="检错原理"></a>检错原理</h1><h2 id="奇偶检验"><a href="#奇偶检验" class="headerlink" title="奇偶检验"></a>奇偶检验</h2><p>我们约定一串编码里1的个数是偶数个，那么这串编码里携带的信息就是对的，否则就是错的。</p>
-<p>我们可以在开头对这串编码加一位校验码实现奇偶校验。</p>
-<p>我们想传输10010这串码，那么在传输的时候，就传010010，其中在开头的0就是校验位。</p>
-<p>我们想传输10000这串码，那么在传输的时候，就传110000，其中在开头的1就是校验位。</p>
-<p>两个例子的1的个数都是偶数。</p>
-<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ol>
-<li>发送者对数字进行分组</li>
-<li>按位填写校验码并发送</li>
-<li>接收者使用分组检测确定哪一位出错</li>
-<li>出错位取反改正结果</li>
-</ol>
-<p><img src="https://i.loli.net/2020/10/13/kmPXcru9UYRxz4f.png" srcset="/img/loading.gif" alt="汉明码.png"></p>
-<p>本文主要对1.2.进行记录，汉明码的核心部分也在前两部分</p>
-<h2 id="确定总位数"><a href="#确定总位数" class="headerlink" title="确定总位数"></a>确定总位数</h2><p>假设校验码一共k位，原始数据一共n位，校验码必须满足<br><a href="https://www.codecogs.com/eqnedit.php?latex=2^{k}>k&plus;n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?2^{k}>k&plus;n" srcset="/img/loading.gif" title="2^{k}>k+n" /></a><br>实际上计算时按第2的n次方位占据检验位，其余的都为原始数据即可</p>
-<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>将数据的位置索引转为二进制数</p>
-<p>也就是</p>
-<p>第1个位置，变成第0001个位置；</p>
-<p>第2个位置，变成第0010个位置；</p>
-<p>第3个位置，变成第0011个位置；</p>
-<p>第4个位置，变成第0100个位置；</p>
-<p>第5个位置，变成第0101个位置；</p>
-<p>第6个位置，变成第0110个位置;</p>
-<p>…</p>
-<p>位置在1,3,5,7,9,11的数据进到P1组。（你转换一下这些位置的二进制，就知道他们的位置符合XXX1）</p>
-<p>位置在2,3,6,7,10,11的数据进到P2组。（位置符合XX1X）</p>
-<p>位置在4,5,6,7的数据进到P3组。（位置符合X1XX）</p>
-<p>位置在8,9,10,11的数据进到P4组。（位置符合1XXX）</p>
-<p>第1，2，4，8位按照奇偶检验填写</p>
-<p>发送给接收方</p>
-<h2 id="接收方检测纠错"><a href="#接收方检测纠错" class="headerlink" title="接收方检测纠错"></a>接收方检测纠错</h2><ol>
-<li>收到汉明码后首先按照P1,P2,P3分组</li>
-<li>对每个组进行奇偶校验，正确的给0，错误的给1</li>
-<li>把P按照从大到小排列起来，该串就是出错的数据的位置。</li>
-<li>对该位数据取反完成改正 </li>
-</ol>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://i.loli.net/2020/10/13/HxA4MZJOLXacq3W.jpg" srcset="/img/loading.gif" alt="汉明码例子.png"></p>
+              <h1 id="如何避免自己成为眼高手低的人"><a href="#如何避免自己成为眼高手低的人" class="headerlink" title="如何避免自己成为眼高手低的人"></a>如何避免自己成为眼高手低的人</h1><ul>
+<li>看看自己作是是否做到了有始有终</li>
+</ul>
+<p>做事不在于开始多少事情，而在于完成多少事情。眼高手低的人往往凡事停留在口头上，永远不会开始做。稍微好点的会开始做，但是不能坚持做完。</p>
+<ul>
+<li>看看自己每做一件，是否做到了比上一件事做得好</li>
+</ul>
+<p>如果自己没有做到，说明还有可以改进的空间，如果做到了，则说明自己的能力在提升，能做的事情越来越大。</p>
 
             </div>
             <hr>
@@ -268,7 +238,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                      <a class="hover-with-bg" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a>
                     
                   </div>
                 
@@ -281,18 +251,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/16/%E9%81%BF%E5%85%8D%E7%9C%BC%E9%AB%98%E6%89%8B%E4%BD%8E%E7%9A%84%E6%96%B9%E6%B3%95/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">避免眼高手低的方法</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/08/%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E7%A0%94%E7%A9%B6/">
-                        <span class="hidden-mobile">复杂网络相关研究</span>
+                      <a href="/2020/10/13/%E6%B1%89%E6%98%8E%E7%A0%81%E7%BC%96%E7%A0%81note/">
+                        <span class="hidden-mobile">汉明码编码note</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -435,7 +399,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "汉明码编码note&nbsp;",
+        "避免眼高手低的方法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
