@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>避免眼高手低的方法 - Wlzzzz_blog</title>
+  <title>配置coc-clangd - Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-16 09:55" pubdate>
-        October 16, 2020 am
+      <time datetime="2020-12-23 19:29" pubdate>
+        December 23, 2020 pm
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      152 字
+      249 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -217,17 +217,31 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">避免眼高手低的方法</h1>
+            <h1 style="display: none">配置coc-clangd</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="如何避免自己成为眼高手低的人"><a href="#如何避免自己成为眼高手低的人" class="headerlink" title="如何避免自己成为眼高手低的人"></a>如何避免自己成为眼高手低的人</h1><ul>
-<li>看看自己是否做到了有始有终</li>
+              <h1 id="解决找不到clangd"><a href="#解决找不到clangd" class="headerlink" title="解决找不到clangd"></a>解决找不到clangd</h1><p>在配置coc.nvim下的插件coc.clangd时，安装好插件在打开cpp文件时报错提示</p>
+<pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.</code></pre>
+
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
+<li>nvim下输入:CocCommand clangd.install nvim会自动在后台下载clangd<br>  上述方法在国内下载速度较慢，笔者等了半天都没安装好，于是选择手动安装</li>
+<li>到clangd的仓库下载clangd11.0.0</li>
 </ul>
-<p>做事不在于开始多少事情，而在于完成多少事情。眼高手低的人往往凡事停留在口头上，永远不会开始做。稍微好点的会开始做，但是不能坚持做完。</p>
-<ul>
-<li>看看自己每做一件，是否做到了比上一件事做得好</li>
-</ul>
-<p>如果自己没有做到，说明还有可以改进的空间，如果做到了，则说明自己的能力在提升，能做的事情越来越大。</p>
+<h1 id="下载clangd11-0-0"><a href="#下载clangd11-0-0" class="headerlink" title="下载clangd11.0.0"></a>下载clangd11.0.0</h1><p><a target="_blank" rel="noopener" href="https://github.com/clangd/clangd/releases/tag/11.0.0">clangd</a><br>下载后运行仍然提示</p>
+<pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.
+</code></pre>
+<p>原因是coc.clangd会在环境变量文件下找clangd，因此需要ln软链接到~/.local/bin/clangd下</p>
+<pre><code class="hljs arcade">cd ~<span class="hljs-regexp">/.local/</span>bin/clangd
+
+touch clangd
+
+ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clangd
+</code></pre>
+
+<p>重新打开neovim可以发现coc.nvim正常运行！</p>
+<h1 id="ln语法"><a href="#ln语法" class="headerlink" title="ln语法"></a>ln语法</h1><p>ln指令的正确使用语法:</p>
+<pre><code class="hljs angelscript">ln -s <span class="hljs-number">1.</span>链接目标 <span class="hljs-number">2.</span>软链接</code></pre>
+<p>1.被链接的目标真实物理路径<br>2.对链接目标创建的符号链接</p>
 
             </div>
             <hr>
@@ -238,7 +252,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+                      <a class="hover-with-bg" href="/tags/neovim/">neovim</a>
                     
                   </div>
                 
@@ -251,18 +265,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/18/%E6%88%91%E7%9A%84vim%E9%85%8D%E7%BD%AE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">我的vim配置</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/13/%E6%B1%89%E6%98%8E%E7%A0%81%E7%BC%96%E7%A0%81note/">
-                        <span class="hidden-mobile">汉明码编码note</span>
+                      <a href="/2020/12/23/%E7%BB%88%E7%AB%AF%E4%B8%8B%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/">
+                        <span class="hidden-mobile">终端下配置代理</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -405,7 +413,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "避免眼高手低的方法&nbsp;",
+        "配置coc-clangd&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

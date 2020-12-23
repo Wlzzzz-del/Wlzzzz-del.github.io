@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>配置coc-clangd</title>
+    <link href="/2020/12/23/%E9%85%8D%E7%BD%AEcoc-clangd/"/>
+    <url>/2020/12/23/%E9%85%8D%E7%BD%AEcoc-clangd/</url>
+    
+    <content type="html"><![CDATA[<h1 id="解决找不到clangd"><a href="#解决找不到clangd" class="headerlink" title="解决找不到clangd"></a>解决找不到clangd</h1><p>在配置coc.nvim下的插件coc.clangd时，安装好插件在打开cpp文件时报错提示</p><pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.</code></pre><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul><li>nvim下输入:CocCommand clangd.install nvim会自动在后台下载clangd<br>  上述方法在国内下载速度较慢，笔者等了半天都没安装好，于是选择手动安装</li><li>到clangd的仓库下载clangd11.0.0</li></ul><h1 id="下载clangd11-0-0"><a href="#下载clangd11-0-0" class="headerlink" title="下载clangd11.0.0"></a>下载clangd11.0.0</h1><p><a href="https://github.com/clangd/clangd/releases/tag/11.0.0">clangd</a><br>下载后运行仍然提示</p><pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.</code></pre><p>原因是coc.clangd会在环境变量文件下找clangd，因此需要ln软链接到~/.local/bin/clangd下</p><pre><code class="hljs arcade">cd ~<span class="hljs-regexp">/.local/</span>bin/clangdtouch clangdln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clangd</code></pre><p>重新打开neovim可以发现coc.nvim正常运行！</p><h1 id="ln语法"><a href="#ln语法" class="headerlink" title="ln语法"></a>ln语法</h1><p>ln指令的正确使用语法:</p><pre><code class="hljs angelscript">ln -s <span class="hljs-number">1.</span>链接目标 <span class="hljs-number">2.</span>软链接</code></pre><p>1.被链接的目标真实物理路径<br>2.对链接目标创建的符号链接</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>neovim</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>终端下配置代理</title>
+    <link href="/2020/12/23/%E7%BB%88%E7%AB%AF%E4%B8%8B%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/"/>
+    <url>/2020/12/23/%E7%BB%88%E7%AB%AF%E4%B8%8B%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="终端下设置代理"><a href="#终端下设置代理" class="headerlink" title="终端下设置代理"></a>终端下设置代理</h1><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">http_proxy</span>=http://127.0.0.1:8889</code></pre><h1 id="git设置代理"><a href="#git设置代理" class="headerlink" title="git设置代理"></a>git设置代理</h1><pre><code class="hljs tcl">git config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">http</span>.proxy <span class="hljs-keyword">http</span>://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8889</span>git config --<span class="hljs-keyword">global</span> --<span class="hljs-keyword">unset</span> <span class="hljs-keyword">http</span>.proxy</code></pre><h1 id="npm设置代理"><a href="#npm设置代理" class="headerlink" title="npm设置代理"></a>npm设置代理</h1><pre><code class="hljs routeros">npm<span class="hljs-built_in"> config </span><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">proxy</span>=http://127.0.0.1:8889</code></pre><h1 id="npm取消代理"><a href="#npm取消代理" class="headerlink" title="npm取消代理"></a>npm取消代理</h1><pre><code class="hljs routeros">npm<span class="hljs-built_in"> config </span>delete proxy</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>终端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>latex算法编辑</title>
     <link href="/2020/10/19/latex%E7%AE%97%E6%B3%95%E7%BC%96%E8%BE%91/"/>
     <url>/2020/10/19/latex%E7%AE%97%E6%B3%95%E7%BC%96%E8%BE%91/</url>
@@ -46,7 +84,7 @@
     <link href="/2020/10/16/%E9%81%BF%E5%85%8D%E7%9C%BC%E9%AB%98%E6%89%8B%E4%BD%8E%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <url>/2020/10/16/%E9%81%BF%E5%85%8D%E7%9C%BC%E9%AB%98%E6%89%8B%E4%BD%8E%E7%9A%84%E6%96%B9%E6%B3%95/</url>
     
-    <content type="html"><![CDATA[<h1 id="如何避免自己成为眼高手低的人"><a href="#如何避免自己成为眼高手低的人" class="headerlink" title="如何避免自己成为眼高手低的人"></a>如何避免自己成为眼高手低的人</h1><ul><li>看看自己作是是否做到了有始有终</li></ul><p>做事不在于开始多少事情，而在于完成多少事情。眼高手低的人往往凡事停留在口头上，永远不会开始做。稍微好点的会开始做，但是不能坚持做完。</p><ul><li>看看自己每做一件，是否做到了比上一件事做得好</li></ul><p>如果自己没有做到，说明还有可以改进的空间，如果做到了，则说明自己的能力在提升，能做的事情越来越大。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="如何避免自己成为眼高手低的人"><a href="#如何避免自己成为眼高手低的人" class="headerlink" title="如何避免自己成为眼高手低的人"></a>如何避免自己成为眼高手低的人</h1><ul><li>看看自己是否做到了有始有终</li></ul><p>做事不在于开始多少事情，而在于完成多少事情。眼高手低的人往往凡事停留在口头上，永远不会开始做。稍微好点的会开始做，但是不能坚持做完。</p><ul><li>看看自己每做一件，是否做到了比上一件事做得好</li></ul><p>如果自己没有做到，说明还有可以改进的空间，如果做到了，则说明自己的能力在提升，能做的事情越来越大。</p>]]></content>
     
     
     

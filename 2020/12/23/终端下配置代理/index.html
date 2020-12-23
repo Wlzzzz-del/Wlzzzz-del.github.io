@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>避免眼高手低的方法 - Wlzzzz_blog</title>
+  <title>终端下配置代理 - Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-16 09:55" pubdate>
-        October 16, 2020 am
+      <time datetime="2020-12-23 19:27" pubdate>
+        December 23, 2020 pm
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      152 字
+      58 字
     </span>
   
 
@@ -217,17 +217,14 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">避免眼高手低的方法</h1>
+            <h1 style="display: none">终端下配置代理</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="如何避免自己成为眼高手低的人"><a href="#如何避免自己成为眼高手低的人" class="headerlink" title="如何避免自己成为眼高手低的人"></a>如何避免自己成为眼高手低的人</h1><ul>
-<li>看看自己是否做到了有始有终</li>
-</ul>
-<p>做事不在于开始多少事情，而在于完成多少事情。眼高手低的人往往凡事停留在口头上，永远不会开始做。稍微好点的会开始做，但是不能坚持做完。</p>
-<ul>
-<li>看看自己每做一件，是否做到了比上一件事做得好</li>
-</ul>
-<p>如果自己没有做到，说明还有可以改进的空间，如果做到了，则说明自己的能力在提升，能做的事情越来越大。</p>
+              <h1 id="终端下设置代理"><a href="#终端下设置代理" class="headerlink" title="终端下设置代理"></a>终端下设置代理</h1><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">http_proxy</span>=http://127.0.0.1:8889</code></pre>
+<h1 id="git设置代理"><a href="#git设置代理" class="headerlink" title="git设置代理"></a>git设置代理</h1><pre><code class="hljs tcl">git config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">http</span>.proxy <span class="hljs-keyword">http</span>://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8889</span>
+git config --<span class="hljs-keyword">global</span> --<span class="hljs-keyword">unset</span> <span class="hljs-keyword">http</span>.proxy</code></pre>
+<h1 id="npm设置代理"><a href="#npm设置代理" class="headerlink" title="npm设置代理"></a>npm设置代理</h1><pre><code class="hljs routeros">npm<span class="hljs-built_in"> config </span><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">proxy</span>=http://127.0.0.1:8889</code></pre>
+<h1 id="npm取消代理"><a href="#npm取消代理" class="headerlink" title="npm取消代理"></a>npm取消代理</h1><pre><code class="hljs routeros">npm<span class="hljs-built_in"> config </span>delete proxy</code></pre>
 
             </div>
             <hr>
@@ -238,7 +235,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BB%88%E7%AB%AF/">终端</a>
                     
                   </div>
                 
@@ -251,9 +248,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/18/%E6%88%91%E7%9A%84vim%E9%85%8D%E7%BD%AE/">
+                      <a href="/2020/12/23/%E9%85%8D%E7%BD%AEcoc-clangd/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">我的vim配置</span>
+                        <span class="hidden-mobile">配置coc-clangd</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -261,8 +258,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/13/%E6%B1%89%E6%98%8E%E7%A0%81%E7%BC%96%E7%A0%81note/">
-                        <span class="hidden-mobile">汉明码编码note</span>
+                      <a href="/2020/10/19/latex%E7%AE%97%E6%B3%95%E7%BC%96%E8%BE%91/">
+                        <span class="hidden-mobile">latex算法编辑</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -405,7 +402,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "避免眼高手低的方法&nbsp;",
+        "终端下配置代理&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
