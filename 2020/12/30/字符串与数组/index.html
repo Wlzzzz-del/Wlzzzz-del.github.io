@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>配置coc-clangd - Wlzzzz_blog</title>
+  <title>Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-23 19:29" pubdate>
-        December 23, 2020 pm
+      <time datetime="2020-12-30 10:37" pubdate>
+        December 30, 2020 am
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      249 字
+      1.6k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      18
        分钟
     </span>
   
@@ -217,44 +217,98 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">配置coc-clangd</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="解决找不到clangd"><a href="#解决找不到clangd" class="headerlink" title="解决找不到clangd"></a>解决找不到clangd</h1><p>在配置coc.nvim下的插件coc.clangd时，安装好插件在打开cpp文件时报错提示</p>
-<pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.</code></pre>
-
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
-<li>nvim下输入:CocCommand clangd.install nvim会自动在后台下载clangd<br>  上述方法在国内下载速度较慢，笔者等了半天都没安装好，于是选择手动安装</li>
-<li>到clangd的仓库下载clangd11.0.0</li>
+              <h1 id="字符串匹配问题"><a href="#字符串匹配问题" class="headerlink" title="字符串匹配问题"></a>字符串匹配问题</h1><h2 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute-Force"></a>Brute-Force</h2><p>顺序遍历母串，将每个字符作为匹配的起始字符，判断是否匹配字串。时间复杂度为$O(m*n)$。</p>
+<h2 id="Rabin-Karp"><a href="#Rabin-Karp" class="headerlink" title="Rabin-Karp"></a>Rabin-Karp</h2><p>将每一个匹配字串映射为一个hash5值。例如，将子串看成是一个多进制数，比较它的值与母串中相同长度子串的hash值，如果相同，再细致地按照字符确认字符串是否确实相同。顺序计算母串hash值的过程中，使用增量计算的方法：扣除最高位的hash值，增加最低位的hash值。因此能在平均情况下做到$O(m+n)$</p>
+<h3 id="什么是hash值"><a href="#什么是hash值" class="headerlink" title="什么是hash值"></a>什么是hash值</h3><p>散列函数(Hash Function)是一种从任何一种数据中创建小的数字”指纹”的方法。该函数将数据打乱混合，重新创建一个叫做散列值的指纹。相同数据的hash值相同。好的散列函数在输入域中很少出现散列冲突。</p>
+<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><h2 id="定义方式"><a href="#定义方式" class="headerlink" title="定义方式"></a>定义方式</h2><ul>
+<li>在Stack上定义长度为arraySize的整型数组<pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-built_in">array</span>Size];</code></pre></li>
+<li>在Heap上定义长度为arraySize的整型数组，使用完后需要释放内存<pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> *<span class="hljs-built_in">array</span> = new <span class="hljs-built_in">int</span>[<span class="hljs-built_in">array</span>Size];</code></pre>
+在heap中数组使用完后需要释放内存<pre><code class="hljs n1ql"><span class="hljs-keyword">delete</span>[] <span class="hljs-keyword">array</span>;</code></pre>
+注意，在旧的编译器中，不能在stack上定义一个长度不确定的数组，即只能定义如下：<pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">10</span>];</code></pre>
+新的编译器没有如上限制。但是如果数组长度不定，则不能初始化数组<pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-built_in">array</span>Size] = &#123;<span class="hljs-number">0</span>&#125;;<span class="hljs-comment">//编译报错</span></code></pre>
+<h2 id="关于stack"><a href="#关于stack" class="headerlink" title="关于stack"></a>关于stack</h2>stack主要是指由操作系统自动管理的内存空间。当进入一个函数，操作系统会为该函数中的局部变量分配储存空间。事实上，系统会分配一个内存块，叠加在当前stack上，并且利用指针指向前一个内存块的地址。<br>函数的局部变量就储存在当前的内存块上。当该函数返回时，系统“弹出”内存块，并且根据指针回到前一个内存块。所以，stack总是以后进先出的方式工作。<h2 id="关于heap"><a href="#关于heap" class="headerlink" title="关于heap"></a>关于heap</h2>Heap是用来储存动态分配变量的空间。对于heap而言，并没有像stack那样后进先出的规则，程序员可以选择随时分配或者回收内存。这就意味着程序员自己用命令回收内存，否则会产生内存泄漏(memory leak).<br>在C/C++中，程序员需要调用free/delete来释放动态分配的内存。在JAVA，Objective-C中，语言本身引入垃圾回收和计数规则帮助用户决定在什么时候自动释放内存。</li>
 </ul>
-<h1 id="下载clangd11-0-0"><a href="#下载clangd11-0-0" class="headerlink" title="下载clangd11.0.0"></a>下载clangd11.0.0</h1><p><a target="_blank" rel="noopener" href="https://github.com/clangd/clangd/releases/tag/11.0.0">clangd</a><br>下载后运行仍然提示</p>
-<pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.
-</code></pre>
-<p>原因是coc.clangd会在环境变量文件下找clangd，因此需要ln软链接到~/.local/bin/clangd下</p>
-<pre><code class="hljs arcade">cd ~<span class="hljs-regexp">/.local/</span>bin/clangd
-
-touch clangd
-
-ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clangd
-</code></pre>
-
-<p>重新打开neovim可以发现coc.nvim正常运行！</p>
-<h1 id="ln语法"><a href="#ln语法" class="headerlink" title="ln语法"></a>ln语法</h1><p>ln指令的正确使用语法:</p>
-<pre><code class="hljs angelscript">ln -s <span class="hljs-number">1.</span>链接目标 <span class="hljs-number">2.</span>软链接</code></pre>
-<p>1.被链接的目标真实物理路径<br>2.对链接目标创建的符号链接</p>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><ul>
+<li><p>在Stack上创建:  </p>
+  <pre><code class="hljs markdown">int array[<span class="hljs-string">M</span>][<span class="hljs-symbol">N</span>];</code></pre>
+<p>  传递给子函数：</p>
+  <pre><code class="hljs markdown">void func(int arr[<span class="hljs-string">M</span>][<span class="hljs-symbol">N</span>])</code></pre>
+<p>  M可以省略，但N必须存在，以便编译器确定移动内存的间距</p>
+</li>
+<li><p>在Heap上创建：  </p>
+  <pre><code class="hljs pgsql"><span class="hljs-type">int</span> **<span class="hljs-keyword">array</span> = <span class="hljs-built_in">new</span> <span class="hljs-type">int</span>*[M];
+//或者 (<span class="hljs-type">int</span>**)malloc(M* sizeof(<span class="hljs-type">int</span>*));</code></pre>
+  <pre><code class="hljs excel">for(<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;M; i++)
+&#123;
+   array[i]= new <span class="hljs-built_in">int</span>[<span class="hljs-built_in">N</span>];
+	//或者 (<span class="hljs-built_in">int</span>*)malloc(<span class="hljs-built_in">N</span> *sizeof(<span class="hljs-built_in">int</span>));
+ &#125;</code></pre>
+<p>  传递给子函数：</p>
+  <pre><code class="hljs go">void <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> **arr, <span class="hljs-keyword">int</span> M, <span class="hljs-keyword">int</span> N)</span></span>&#123;&#125;</code></pre>
+<p>  使用完后需要释放内存:</p>
+  <pre><code class="hljs cpp"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;M; i++)
+<span class="hljs-keyword">delete</span>[] <span class="hljs-built_in">array</span>[i];<span class="hljs-comment">//先释放二维指针</span>
+<span class="hljs-keyword">delete</span>[] <span class="hljs-built_in">array</span>;<span class="hljs-comment">//再释放一维指针</span></code></pre>
+<h1 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h1></li>
+<li><p>Vector 可以用云算法[]直接访问元素</p>
+</li>
+<li><p>size_type size()) const;//返回vector的元素个数</p>
+</li>
+<li><p>void push_back(const value_type val);//末端插入</p>
+</li>
+<li><p>pop_back()删除最后一个元素</p>
+</li>
+<li><p>erase()可以删除一个由iterator指出的元素，也可以删除一个指定的元素</p>
+</li>
+<li><p>remove()也可以删除vector容器中的元素(不建议使用)</p>
+</li>
+<li><p>不同的是，remove()一般情况下不会改变容器大小，popback()和erase()等成员函数会改变容器大小。</p>
+</li>
+<li><p>正确的使用iterator删除元素</p>
+<pre><code class="hljs C++"><span class="hljs-keyword">for</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = v.begin();it!=v.end();)
+&#123;
+  <span class="hljs-comment">//使用if else语句删除元素防止越界</span>
+  <span class="hljs-keyword">if</span>(condition)&#123;
+	it = v.erase(it);
+	&#125;<span class="hljs-keyword">else</span>&#123;
+	++it;
+	&#125;
+&#125;</code></pre>
+<h1 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h1><p>Hash Table 几乎是最为重要的数据结构，主要用于基于“key”的查找，存储的基本元素是key-value的pair。逻辑上，数组可以作为Hash Table的一个特例：key是一个非负整数。<br>C++标准库中提供map容器，可以插入，删除，查找key-value pair,底层以平衡二叉搜索树的方式实现，根据key进行了排序。<br>在C++11中，标准库添加了unordered_map,更符合Hash table的传统定义，平均查找时间$O(1)$</p>
+</li>
+</ul>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><p>在C语言中，字符串指的是一个以’\0’结尾的char数组。关于字符串的函数通常需要传入一个字符型指针。<br>在C++中，String是一个类，并且可以通过调用类函数实现判断字符串长度，字串等操作。  </p>
+<ul>
+<li><p>C语言中String常用函数  </p>
+<ul>
+<li>char* strcpy(char* destination, const char* source) - 复制原字符串到目标字符串</li>
+<li>char* strcat(char* destination, const char* source) - 将原字符串插入目标字符串</li>
+<li>int strcmp(const char* str1, const char* str2) - 比较两个字符串，若相等则返回0，否则返回正数</li>
+<li>char* strstr(char* str1, const char* str2) - 返回一个指针，指向str2在str1的所在位置，如果str2不在str1中则返回NULL</li>
+<li>size_type strlen(const char* str) - 返回C字符串的长度</li>
+<li>double atof(const char* str) - 将一个字符串转换成double类型</li>
+<li>int atoi(const char* str) - 将一个字符串转换成int类型</li>
+</ul>
+</li>
+<li><p>C++中String类常用函数  </p>
+<ul>
+<li>String类重载了+,&gt;,&lt;,=,==等运算符，比较是否相等，附加子串等都可以用运算符来实现。</li>
+<li>size_t find(const string str, size_type pos = 0)const - 搜索子串在字符串中首次出现的位置，返回索引</li>
+<li>string substr(size_t pos=0, size_t len=npos)const; - 从一个指定位置开始复制字符串</li>
+<li>string erase(size_t pos=0, size_t len=npos) - 消除从某个位置开始的某个长度的子串</li>
+<li>size_t length() - 返回字符串的长度<h1 id="模式识别"><a href="#模式识别" class="headerlink" title="模式识别"></a>模式识别</h1>当遇到某些题目需要统计一个元素集中元素出现的次数，应该直觉反应使用Hash Table,即使用std::unordered_map或std::map: key是元素，value是出现的次数。特别地， 有一些题目仅仅需要判断元素出现与否(相当于判断value是0还是1),可以用bitvector, 即bitset，利用一个bit来表示当前的下标是否有值。</li>
+</ul>
+</li>
+</ul>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/neovim/">neovim</a>
-                    
-                  </div>
                 
               </div>
               
@@ -265,18 +319,12 @@ ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clan
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/30/map%E4%B8%8Eunordered_map/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/23/%E7%BB%88%E7%AB%AF%E4%B8%8B%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/">
-                        <span class="hidden-mobile">终端下配置代理</span>
+                      <a href="/2020/12/30/%E4%BB%A3%E7%A0%81%E7%B4%A0%E5%85%BB/">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -419,7 +467,7 @@ ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clan
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "配置coc-clangd&nbsp;",
+        "&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

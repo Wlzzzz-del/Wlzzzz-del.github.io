@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>配置coc-clangd - Wlzzzz_blog</title>
+  <title>Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-23 19:29" pubdate>
-        December 23, 2020 pm
+      <time datetime="2020-12-30 10:37" pubdate>
+        December 30, 2020 am
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      249 字
+      466 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      5
        分钟
     </span>
   
@@ -217,44 +217,56 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">配置coc-clangd</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="解决找不到clangd"><a href="#解决找不到clangd" class="headerlink" title="解决找不到clangd"></a>解决找不到clangd</h1><p>在配置coc.nvim下的插件coc.clangd时，安装好插件在打开cpp文件时报错提示</p>
-<pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.</code></pre>
-
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
-<li>nvim下输入:CocCommand clangd.install nvim会自动在后台下载clangd<br>  上述方法在国内下载速度较慢，笔者等了半天都没安装好，于是选择手动安装</li>
-<li>到clangd的仓库下载clangd11.0.0</li>
+              <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>所有元素根据元素的键值key自动排序</li>
+<li>每个元素都是&lt;key,value&gt;的键值对</li>
+<li>不允许有键值相同的元素</li>
+<li>key不能修改，但可以通过key修改与其对应的value</li>
+<li>可以删除与value对应的键值key，重新插入以达到修改的目的<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2></li>
+<li>有序性，这是map结构最大的优点，可以简化很多操作</li>
+<li>红黑树，内部实现一个红黑树使得map很多操作可以在$log_n$复杂度下就可以实现，效率非常高<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2></li>
+<li>空间占用率高，map内部实现了红黑树，虽然提高了运行效率，但是每个结点都需要额外保存父节点、孩子节点和红黑性质，使得每个结点都占用大量的空间</li>
 </ul>
-<h1 id="下载clangd11-0-0"><a href="#下载clangd11-0-0" class="headerlink" title="下载clangd11.0.0"></a>下载clangd11.0.0</h1><p><a target="_blank" rel="noopener" href="https://github.com/clangd/clangd/releases/tag/11.0.0">clangd</a><br>下载后运行仍然提示</p>
-<pre><code class="hljs css"><span class="hljs-selector-attr">[coc.nvim]</span> <span class="hljs-selector-tag">clangd</span> <span class="hljs-selector-tag">was</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">found</span> <span class="hljs-selector-tag">on</span> <span class="hljs-selector-tag">your</span> <span class="hljs-selector-tag">PATH</span>. <span class="hljs-selector-pseudo">:CocCommand</span> <span class="hljs-selector-tag">clangd</span><span class="hljs-selector-class">.install</span> <span class="hljs-selector-tag">will</span> <span class="hljs-selector-tag">install</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span>.
-</code></pre>
-<p>原因是coc.clangd会在环境变量文件下找clangd，因此需要ln软链接到~/.local/bin/clangd下</p>
-<pre><code class="hljs arcade">cd ~<span class="hljs-regexp">/.local/</span>bin/clangd
+<h2 id="作用场景"><a href="#作用场景" class="headerlink" title="作用场景"></a>作用场景</h2><ul>
+<li>字典</li>
+<li>统计出现次数<br>##常用操作<pre><code class="hljs C++"><span class="hljs-comment">//初始化和插入</span>
+<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">string</span>&gt; mymap = &#123;&#123;<span class="hljs-number">4</span>, <span class="hljs-string">&quot;张大&quot;</span>&#125;,&#123;<span class="hljs-number">5</span>, <span class="hljs-string">&quot;李五&quot;</span>&#125;&#125;;<span class="hljs-comment">//使用&#123;&#125;赋值</span>
+myMap[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;李四&quot;</span>;<span class="hljs-comment">//使用[]进行单个插入，若已经存在键值2,则赋值修改，若无则插入</span>
+myMap.insert(<span class="hljs-built_in">pair</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">string</span>&gt;(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;陈二&quot;</span>));<span class="hljs-comment">//使用insert和pair插入</span>
 
-touch clangd
 
-ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clangd
-</code></pre>
+<span class="hljs-comment">//遍历输出+迭代器使用</span>
+<span class="hljs-keyword">auto</span> iter= myMap.begin();<span class="hljs-comment">//auto自动识别迭代器类型为unordered_map&lt;int, string&gt;</span>
+<span class="hljs-keyword">while</span>(iter!=myMap.end())
+&#123;
+  <span class="hljs-built_in">cout</span>&lt;&lt; iter-&gt;first &lt;&lt;<span class="hljs-string">&quot;,&quot;</span> &lt;&lt; iter-&gt;second &lt;&lt;<span class="hljs-built_in">endl</span>;
+	++iter;
+&#125;
 
-<p>重新打开neovim可以发现coc.nvim正常运行！</p>
-<h1 id="ln语法"><a href="#ln语法" class="headerlink" title="ln语法"></a>ln语法</h1><p>ln指令的正确使用语法:</p>
-<pre><code class="hljs angelscript">ln -s <span class="hljs-number">1.</span>链接目标 <span class="hljs-number">2.</span>软链接</code></pre>
-<p>1.被链接的目标真实物理路径<br>2.对链接目标创建的符号链接</p>
+<span class="hljs-comment">//查找元素并输出+迭代器的使用</span>
+<span class="hljs-keyword">auto</span> iterator = myMap.find(<span class="hljs-number">2</span>);<span class="hljs-comment">//find返回一个指向2的迭代器</span>
+<span class="hljs-keyword">if</span>((iterator != myMap.end())
+				<span class="hljs-built_in">cout</span>&lt;&lt; <span class="hljs-built_in">endl</span> &lt;&lt; iterator-&gt;first &lt;&lt;<span class="hljs-string">&quot;,&quot;</span> &lt;&lt;iterator-&gt;second&lt;&lt;<span class="hljs-built_in">endl</span>;
+system(<span class="hljs-string">&quot;pause&quot;</span>);
+<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</code></pre>
+
+</li>
+</ul>
+<h1 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h1><h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>内部实现了Hash_table，因此查找速度非常快<h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2></li>
+<li>建立Hash_table耗费时间<h2 id="作用场景-1"><a href="#作用场景-1" class="headerlink" title="作用场景"></a>作用场景</h2></li>
+<li>查找问题  </li>
+</ul>
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><p>与map类似</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/neovim/">neovim</a>
-                    
-                  </div>
                 
               </div>
               
@@ -265,7 +277,7 @@ ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clan
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/30/map%E4%B8%8Eunordered_map/">
+                      <a href="/2020/12/30/bitset%E7%94%A8%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile"></span>
                         <span class="visible-mobile">Previous</span>
@@ -275,8 +287,8 @@ ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clan
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/23/%E7%BB%88%E7%AB%AF%E4%B8%8B%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/">
-                        <span class="hidden-mobile">终端下配置代理</span>
+                      <a href="/2020/12/23/%E9%85%8D%E7%BD%AEcoc-clangd/">
+                        <span class="hidden-mobile">配置coc-clangd</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -419,7 +431,7 @@ ln -s [clangd源程序地址] ~<span class="hljs-regexp">/.local/</span>bin/clan
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "配置coc-clangd&nbsp;",
+        "&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
