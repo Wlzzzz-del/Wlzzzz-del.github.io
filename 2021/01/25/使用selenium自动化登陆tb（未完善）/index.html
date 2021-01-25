@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      519 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      6
        分钟
     </span>
   
@@ -220,7 +220,40 @@
             <h1 style="display: none">使用selenium自动化登陆tb（未完善）</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>前些日子学习了爬虫，尝试使用selenium自动化登陆淘宝，但淘宝现在的反爬虫技术能识别selenium等浏览器自动化使登陆界面出现滑块。根据网上的资料，可以在后台找出检测浏览器的js脚本进行屏蔽干扰，但本文没有完善这一功能。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>需要浏览器（本文使用chrome）</li>
+<li>需要浏览器对应的驱动（需要自行下载，驱动版本与浏览器版本需要对应一致）</li>
+<li>python3.6 + selenium  </li>
+</ul>
+<h1 id="简易的selenium教程"><a href="#简易的selenium教程" class="headerlink" title="简易的selenium教程"></a>简易的selenium教程</h1><h2 id="导入selenium库"><a href="#导入selenium库" class="headerlink" title="导入selenium库"></a>导入selenium库</h2><pre><code class="hljs python"><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver
+<span class="hljs-keyword">import</span> time</code></pre>
+
+<h2 id="配置浏览器选项"><a href="#配置浏览器选项" class="headerlink" title="配置浏览器选项"></a>配置浏览器选项</h2><p>首先是新建一个浏览器配置对象</p>
+<pre><code class="hljs python">options = webdriver.ChromeOptions()
+options.add_argument(<span class="hljs-string">&#x27;headless&#x27;</span>)<span class="hljs-comment"># 使用后台进行浏览器模拟</span>
+options.add_argument(<span class="hljs-string">&#x27;--disable-gpu&#x27;</span>)<span class="hljs-comment"># 关闭gpu渲染</span>
+options.add_argument(<span class="hljs-string">&#x27;--proxy-server=http://&quot;+ip)# 使用ip进行模拟</span></code></pre>
+
+<h2 id="创建浏览器对象"><a href="#创建浏览器对象" class="headerlink" title="创建浏览器对象"></a>创建浏览器对象</h2><pre><code class="hljs python">address = <span class="hljs-string">&#x27;./chromedriver.exe&#x27;</span><span class="hljs-comment"># chrome驱动</span>
+broswer = webdriver.Chrome(chrome_options = options, executable_path= address)<span class="hljs-comment"># 创建浏览器对象</span>
+time.sleep(<span class="hljs-number">1</span>)<span class="hljs-comment"># 设置操作间隔</span></code></pre>
+<h2 id="进入页面并递交账号密码"><a href="#进入页面并递交账号密码" class="headerlink" title="进入页面并递交账号密码"></a>进入页面并递交账号密码</h2><p>selenium可以根据xpath、id等多种方式定位网页元素<br>使用浏览器选定所要的元素，右键检查，然后在出现html代码中右键即可复制xpath、id等信息</p>
+<pre><code class="hljs python">id = <span class="hljs-string">&#x27;xxx&#x27;</span>
+password = <span class="hljs-string">&#x27;xxx&#x27;</span>
+url = <span class="hljs-string">&#x27;https://login.taobao.com/member/login.jhtml&#x27;</span><span class="hljs-comment"># 淘宝登陆的url</span>
+broswer.get(url)<span class="hljs-comment"># 进入登陆界面</span>
+broswer.find_element_by_xpath(<span class="hljs-string">&#x27;//*[@id=&quot;login-form&quot;]/div[1]/div[2]&#x27;</span>).click()<span class="hljs-comment"># 定位登陆账号框</span>
+broswer.find_element_by_id(<span class="hljs-string">&#x27;fm-login-id&#x27;</span>).send_keys(id)<span class="hljs-comment"># 定位输入框，并输入id</span>
+broswer.find_element_by_id(<span class="hljs-string">&#x27;fm-login-password&#x27;</span>).send_keys(password)<span class="hljs-comment"># 定位输入框，并输入password</span>
+<span class="hljs-comment"># 判断是否需要滑块</span>
+<span class="hljs-keyword">if</span> broswer.find_element_by_xpath(<span class="hljs-string">&#x27;//*[@id=&quot;nc_1__scale_text&quot;]/span&#x27;</span>):
+				print(<span class="hljs-string">&quot;需要滑块&quot;</span>)
+
+broswer.close()<span class="hljs-comment"># 关闭浏览器</span></code></pre>
+
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>现在各大互联网对爬虫的封杀十分严重，要绕过检测脚本只能通过后台屏蔽，或者使用requests爬虫，但是requests需要提交的密码进行了加密，即我们需要知道加密算法才能正确提交。</p>
+
             </div>
             <hr>
             <div>
