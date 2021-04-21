@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      463 字
+      466 字
     </span>
   
 
@@ -221,9 +221,10 @@
             
             <div class="markdown-body" id="post-body">
               <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>网络就像是一张图，网页作为节点，链接作为边。当我们想要对网页进行排名，如此多的网页如何实现呢？于是google公司基于链接投票法开发了PageRank算法用于搜索引擎对网页进行排名。</p>
+<p>$$ E=mc^2 $$</p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ul>
 <li>每个链接的投票作用于他的源页面</li>
-<li>如果页面$j$有$n$个出链，那么每个出链会获得$r_j/n$张票</li>
+<li>如果页面$$j$$有$n$个出链，那么每个出链会获得$r_j/n$张票</li>
 <li>页面$j$的个人重要度是所有他的入链的票数之和<br>根据以上的理论基础我们可以推出:</li>
 <li>一张来自重要度很高的页面的票也同样很重要</li>
 <li>如果一个页面被其他重要度很高的页面所链接，那么这个页面的重要度也很高</li>
