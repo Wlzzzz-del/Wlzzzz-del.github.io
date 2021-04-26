@@ -17,7 +17,7 @@
   <meta name="description" content="努力学习的小吴">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>浅谈PageRank算法以及实现(未完成) - Wlzzzz_blog</title>
+  <title>浅谈PageRank算法以及实现 - Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -217,7 +217,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">浅谈PageRank算法以及实现(未完成)</h1>
+            <h1 style="display: none">浅谈PageRank算法以及实现</h1>
             
             <div class="markdown-body" id="post-body">
               <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>网络就像是一张图，网页作为节点，链接作为边。当我们想要对网页进行排名，如此多的网页如何实现呢？于是google公司基于链接投票法开发了PageRank算法用于搜索引擎对网页进行排名。</p>
@@ -254,28 +254,28 @@
 <ul>
 <li>有$\beta$的概率浏览出链的网页</li>
 <li>有$1-\beta$的概率浏览非出链的网页  </li>
-<li>$\Beta$介于0.8到0.9之间<br>通过调整后，一个社区内的节点也有可能在某次循环中访问到社区外的节点。</li>
+<li>$\beta$介于0.8到0.9之间<br>通过调整后，一个社区内的节点也有可能在某次循环中访问到社区外的节点。</li>
 </ul>
 <h2 id="解决死胡同问题"><a href="#解决死胡同问题" class="headerlink" title="解决死胡同问题"></a>解决死胡同问题</h2><p>(此处加入p41的图）<br>对该矩阵$M$中该节点所在的行，给所有节点赋予$1/n$的值</p>
-<h2 id="公式的优化"><a href="#公式的优化" class="headerlink" title="公式的优化"></a>公式的优化</h2><p>那么基于以上两个问题的解决方法，我们可以推导出新的公式:<br>旧的计算公式:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>新的计算公式：<br>$$r_j=\Sigma_{i-&gt;j}\Beta*r_i/d_i+(1-\Beta)*1/N$$</p>
-<p>于是我们得出一个新的矩阵<br>$$A=\Beta<em>M+(1-\Beta)</em>[1/N]_{N<em>N}$$<br>因此我们计算时只需要循环计算<br>$$r=A</em>r$$<br>最终收敛即可得到结果</p>
+<h2 id="公式的优化"><a href="#公式的优化" class="headerlink" title="公式的优化"></a>公式的优化</h2><p>那么基于以上两个问题的解决方法，我们可以推导出新的公式:<br>旧的计算公式:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>新的计算公式：<br>$$r_j=\Sigma_{i-&gt;j}\beta*r_i/d_i+(1-\beta)*1/N$$</p>
+<p>于是我们得出一个新的矩阵<br>$$A=\beta<em>M+(1-\beta)</em>[1/N]_{N<em>N}$$<br>因此我们计算时只需要循环计算<br>$$r=A</em>r$$<br>最终收敛即可得到结果</p>
 <h1 id="实际运算该如何优化算法"><a href="#实际运算该如何优化算法" class="headerlink" title="实际运算该如何优化算法"></a>实际运算该如何优化算法</h1><p>那么google是如何进行实际的运算呢?整个算法最核心的步骤就是**<em>矩阵乘法**</em>。<br>如果我们有足够大的内存空间可以存取矩阵 $A,r^{old},r^{new}$.<br>假设我们有一个包含10亿个节点的矩阵</p>
 <ul>
 <li>我们需要四位用来存储每个记录</li>
 <li>对于矩阵来说有20亿个记录，需要8GB</li>
-<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2>推导：<br>$$r = A<em>r, A_{ji}=\Beta</em>M_{ji}+{1-\Beta}/N$$<br>$$r_j=\Sigma^{N}<em>{i=1}A</em>{ji}<em>r_i$$<br>$$r_j=\Sigma^{N}_{i=1}[\Beta</em>M_{ji}+{1-\Beta}/N]<em>r_i$$<br>$$r_j=\Sigma^{N}_{i=1}\Beta</em>M_{ji}<em>r_i+{1-\Beta}/N</em>\Sigma^{N}<em>{i=1}r_i$$<br>$$r_j=\Sigma^{N}</em>{i=1}\Beta<em>M_{ji}<em>r_i+{1-\Beta}/N</em>$$<br>通过推导我们将公式化简为<br>$$r=\Beta</em>M*r+[{1-\Beta}/N]_N$$<br>在新的公式中，我们只需  </li>
-<li>计算$r^{new}=\Beta<em>M</em>r^{old}$</li>
-<li>把$r^{new}$加上$(1-\Beta)/N$<br>但即使是优化到如此地步，我们仍然需要足够的内存能够存储$M$矩阵。那么我们能不能对$M$矩阵的存储进行优化？</li>
+<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2>推导：<br>$$r = A<em>r, A_{ji}=\beta</em>M_{ji}+{1-\beta}/N$$<br>$$r_j=\Sigma^{N}<em>{i=1}A</em>{ji}<em>r_i$$<br>$$r_j=\Sigma^{N}_{i=1}[\beta</em>M_{ji}+{1-\beta}/N]<em>r_i$$<br>$$r_j=\Sigma^{N}_{i=1}\beta</em>M_{ji}<em>r_i+{1-\beta}/N</em>\Sigma^{N}<em>{i=1}r_i$$<br>$$r_j=\Sigma^{N}</em>{i=1}\beta<em>M_{ji}<em>r_i+{1-\beta}/N</em>$$<br>通过推导我们将公式化简为<br>$$r=\beta</em>M*r+[{1-\beta}/N]_N$$<br>在新的公式中，我们只需  </li>
+<li>计算$r^{new}=b\eta<em>M</em>r^{old}$</li>
+<li>把$r^{new}$加上$(1-\beta)/N$<br>但即使是优化到如此地步，我们仍然需要足够的内存能够存储$M$矩阵。那么我们能不能对$M$矩阵的存储进行优化？</li>
 </ul>
 <h2 id="M-矩阵的优化"><a href="#M-矩阵的优化" class="headerlink" title="$M$矩阵的优化"></a>$M$矩阵的优化</h2><p>原始的$M$矩阵类似于邻接矩阵，我们只需要$o(1)$的时间复杂度就可以判断某个边是否存在,但是我们算法的核心并不在于此,因此我们需要对数据结构进行修改。<br>(插入优化图p52)<br>实际上我们只需要存储节点的源、度、目标三个数据即可，因此我们用一个$N*3$的矩阵存储这些数据,第一维度存储source，第二维度存储degree，第三维度存储destination.<br>在这样的数据结构下，算法的流程可以写成:</p>
 <ol>
-<li>初始化所有节点的$r^{new}=(1-\Beta)/N}</li>
+<li>初始化所有节点的$r^{new}=(1-\beta)/N$</li>
 <li>对每个节点:<pre><code>         1. 将source,degree,destination读入内存
          2. 对每个destination:
-                         1. 计算$r^&#123;new&#125;(dest_j) += \Beta*r^&#123;old&#125;(i)/d_j$  </code></pre>
+                         1. 计算$r^&#123;new&#125;(dest_j) += \beta*r^&#123;old&#125;(i)/d_j$  </code></pre>
 但是由于数据量过大，即便是这样的矩阵存储，我们也没有足够的RAM可以用来存放。  <h2 id="如何解决存放的问题？"><a href="#如何解决存放的问题？" class="headerlink" title="如何解决存放的问题？"></a>如何解决存放的问题？</h2>由于内存空间不足，我们可以将数据存放在磁盘，并且在算法需要读取时使用读取函数进行访问和修改。<br>但是随之而来的问题是，如此庞大的数据文件如果进行频繁的读写实际上效率非常低,主要是因为每次访问都需要重新打开文件，并且访问到其他不需要的节点。<h2 id="解决读写效率低的问题"><a href="#解决读写效率低的问题" class="headerlink" title="解决读写效率低的问题"></a>解决读写效率低的问题</h2>我们可以对硬盘上的数据文件按照编号分块存储，以此提高读写速度和减少不必要的浪费。</li>
 </ol>
-
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1>
             </div>
             <hr>
             <div>
@@ -474,7 +474,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "浅谈PageRank算法以及实现(未完成)&nbsp;",
+        "浅谈PageRank算法以及实现&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
