@@ -229,7 +229,7 @@
 <li>如果一个页面被其他重要度很高的页面所链接，那么这个页面的重要度也很高</li>
 </ul>
 <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>因此我们定义一个排名分数$r_j$作为页面$j$的排名分数:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>($d_i$指的是节点i的度)  </p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>(此处加入例子的图片page21)<br>在以上的图中，三个节点的分数$r_j$分别为<br>$$r_y = r_y/2+r_a/2$$<br>$$r_a=<a href="r_y/2">r_y 2</a>+r_m$$<br>$$r_m=r_a/2$$</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>(此处加入例子的图片page21)<br>在以上的图中，三个节点的分数$r_j$分别为<br>$$r_y = r_y/2+r_a/2$$<br>$$r_a=r_y/2+r_m$$<br>$$r_m=r_a/2$$</p>
 <h1 id="基础公式"><a href="#基础公式" class="headerlink" title="基础公式"></a>基础公式</h1><p>知道了如何计算，我们应该抽象出适用于大型图计算的公式！  </p>
 <h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>随机矩阵$M$<br>假设网页$i$有$d_i$个出链<br>如果$i-&gt;j$ ,那么就设$M_{ji}=1/d_i$ 否则$M_{ji}=0$<br>M是一个随机矩阵，每一列的和为1<br>$r_i$是一列存储网页$i$重要性分数的向量<br>$$\Sigma_{i}r_i = 1$$<br>实际上$r$是$M$的特征向量<br>那么排名运算可以写成$r = M * r$<br>(此处加入例子图片page25)</p>
 <h1 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h1><ul>
