@@ -239,8 +239,10 @@
 <li><strong><em>初始化分数矩阵</em></strong>:  $r^{0} = [1/N,…,1/N]^T$</li>
 <li><strong><em>循环计算</em></strong>:  $r^(t+1)=M*r^(t)$</li>
 <li><strong><em>直到收敛</em></strong>:  $|r^(t+1)-r^(t)|_1&lt;\epsilon$</li>
-<li><strong><em>输出r（排名结果）</em></strong><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1>(此处加入p37图片)<br>以上就是PageRank算法的全部流程，但是实际上还存在一些问题<h2 id="死胡同-dead-end"><a href="#死胡同-dead-end" class="headerlink" title="死胡同(dead end)"></a>死胡同(dead end)</h2>死胡同现象指的是一些网页不存在出链，这会导致：</li>
+<li><strong><em>输出r（排名结果）</em></strong></li>
 </ul>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>(此处加入p37图片)<br>以上就是PageRank算法的全部流程，但是实际上还存在一些问题</p>
+<h2 id="死胡同-dead-end"><a href="#死胡同-dead-end" class="headerlink" title="死胡同(dead end)"></a>死胡同(dead end)</h2><p>死胡同现象指的是一些网页不存在出链，这会导致：</p>
 <ol>
 <li>随机矩阵的步骤无处可去</li>
 <li>导致一些重要的网页分数$r_j$降低</li>
@@ -258,14 +260,28 @@
 </ul>
 <h2 id="解决死胡同问题"><a href="#解决死胡同问题" class="headerlink" title="解决死胡同问题"></a>解决死胡同问题</h2><p>(此处加入p41的图）<br>对该矩阵$M$中该节点所在的行，给所有节点赋予$1/n$的值</p>
 <h2 id="公式的优化"><a href="#公式的优化" class="headerlink" title="公式的优化"></a>公式的优化</h2><p>那么基于以上两个问题的解决方法，我们可以推导出新的公式:<br>旧的计算公式:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>新的计算公式：<br>$$r_j=\Sigma_{i-&gt;j}\beta*r_i/d_i+(1-\beta)*1/N$$  </p>
-<p>于是我们得出一个新的矩阵<br>$$A=\beta<em>M+(1-\beta)</em>[1/N]_{N<em>N}$$<br>因此我们计算时只需要循环计算<br>$$r=A</em>r$$<br>最终收敛即可得到结果  </p>
+<p>于是我们得出一个新的矩阵  </p>
+<p>$$A=\beta<em>M+(1-\beta)</em>[1/N]_{N*N}$$  </p>
+<p>因此我们计算时只需要循环计算  </p>
+<p>$$r=A*r$$  </p>
+<p>最终收敛即可得到结果  </p>
 <h1 id="实际运算该如何优化算法"><a href="#实际运算该如何优化算法" class="headerlink" title="实际运算该如何优化算法"></a>实际运算该如何优化算法</h1><p>那么google是如何进行实际的运算呢?整个算法最核心的步骤就是**<em>矩阵乘法**</em>。<br>如果我们有足够大的内存空间可以存取矩阵 $A,r^{old},r^{new}$.<br>假设我们有一个包含10亿个节点的矩阵  </p>
 <ul>
 <li>我们需要四位用来存储每个记录</li>
 <li>对于矩阵来说有20亿个记录，需要8GB</li>
-<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2>推导：<br>$$r = A<em>r, A_{ji}=\beta</em>M_{ji}+{1-\beta}/N$$<br>$$r_j=\Sigma^{N}<em>{i=1}A</em>{ji}<em>r_i$$<br>$$r_j=\Sigma^{N}_{i=1}[\beta</em>M_{ji}+{1-\beta}/N]<em>r_i$$<br>$$r_j=\Sigma^{N}_{i=1}\beta</em>M_{ji}<em>r_i+{1-\beta}/N</em>\Sigma^{N}<em>{i=1}r_i$$<br>$$r_j=\Sigma^{N}</em>{i=1}\beta<em>M_{ji}<em>r_i+{1-\beta}/N</em>$$<br>通过推导我们将公式化简为<br>$$r=\beta</em>M*r+[{1-\beta}/N]_N$$<br>在新的公式中，我们只需  </li>
-<li>计算$r^{new}=b\eta<em>M</em>r^{old}$  </li>
-<li>把$r^{new}$加上$(1-\beta)/N$<br>但即使是优化到如此地步，我们仍然需要足够的内存能够存储$M$矩阵。那么我们能不能对$M$矩阵的存储进行优化？</li>
+<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2>推导：</li>
+</ul>
+<p>$$r = A<em>r, A_{ji}=\beta</em>M_{ji}+{1-\beta}/N$$  </p>
+<p>$$r_j=\Sigma^{N}<em>{i=1}A</em>{ji}*r_i$$  </p>
+<p>$$r_j=\Sigma^{N}<em>{i=1}[\beta*M</em>{ji}+{1-\beta}/N]*r_i$$  </p>
+<p>$$r_j=\Sigma^{N}<em>{i=1}\beta*M</em>{ji}<em>r_i+{1-\beta}/N</em>\Sigma^{N}_{i=1}r_i$$  </p>
+<p>$$r_j=\Sigma^{N}<em>{i=1}\beta*M</em>{ji}<em>r_i+{1-\beta}/N</em>$$  </p>
+<p>通过推导我们将公式化简为</p>
+<p>$$r=\beta<em>M</em>r+[{1-\beta}/N]_N$$  </p>
+<p>在新的公式中，我们只需  </p>
+<ul>
+<li>计算 $r^{new}=b\eta<em>M</em>r^{old}$  </li>
+<li>把 $r^{new}$加上$(1-\beta)/N$<br>但即使是优化到如此地步，我们仍然需要足够的内存能够存储$M$矩阵。那么我们能不能对$M$矩阵的存储进行优化？</li>
 </ul>
 <h2 id="M-矩阵的优化"><a href="#M-矩阵的优化" class="headerlink" title="$M$矩阵的优化"></a>$M$矩阵的优化</h2><p>原始的$M$矩阵类似于邻接矩阵，我们只需要$o(1)$的时间复杂度就可以判断某个边是否存在,但是我们算法的核心并不在于此,因此我们需要对数据结构进行修改。<br>(插入优化图p52)<br>实际上我们只需要存储节点的源、度、目标三个数据即可，因此我们用一个$N*3$的矩阵存储这些数据,第一维度存储source，第二维度存储degree，第三维度存储destination.<br>在这样的数据结构下，算法的流程可以写成:</p>
 <ol>
@@ -312,7 +328,7 @@
                     
                     
                       <a href="/2021/01/25/%E4%BD%BF%E7%94%A8selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E7%99%BB%E9%99%86tb%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%96%84%EF%BC%89/">
-                        <span class="hidden-mobile">使用selenium自动化登陆tb（未完善）</span>
+                        <span class="hidden-mobile">使用selenium自动化登陆tb</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
