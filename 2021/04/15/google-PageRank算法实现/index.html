@@ -261,7 +261,7 @@
 <h2 id="解决死胡同问题"><a href="#解决死胡同问题" class="headerlink" title="解决死胡同问题"></a>解决死胡同问题</h2><p>(此处加入p41的图）<br>对该矩阵$M$中该节点所在的行，给所有节点赋予$1/n$的值</p>
 <h2 id="公式的优化"><a href="#公式的优化" class="headerlink" title="公式的优化"></a>公式的优化</h2><p>那么基于以上两个问题的解决方法，我们可以推导出新的公式:<br>旧的计算公式:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>新的计算公式：<br>$$r_j=\Sigma_{i-&gt;j}\beta*r_i/d_i+(1-\beta)*1/N$$  </p>
 <p>于是我们得出一个新的矩阵  </p>
-<p>$$A=\Beta<em>M+(1-\Beta)</em>[1/N]_{N*N}$$  </p>
+<p>$$A=\beta<em>M+(1-\beta)</em>(1/N)_{N*N}$$  </p>
 <p>因此我们计算时只需要循环计算  </p>
 <p>$$r=A*r$$  </p>
 <p>最终收敛即可得到结果  </p>
