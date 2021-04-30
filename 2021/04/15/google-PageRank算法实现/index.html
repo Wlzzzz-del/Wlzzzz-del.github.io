@@ -269,9 +269,9 @@
 <ul>
 <li>我们需要四位用来存储每个记录</li>
 <li>对于矩阵来说有20亿个记录，需要8GB</li>
-<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2>推导：</li>
+<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。</li>
 </ul>
-<p>$$r = A<em>r, A_{ji}=\beta</em>M_{ji}+{1-\beta}/N$$  </p>
+<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2><p>$$r = A<em>r, A_{ji}=\beta</em>M_{ji}+{1-\beta}/N$$  </p>
 <p>$$r_j=\Sigma^{N}<em>{i=1}A</em>{ji}*r_i$$  </p>
 <p>$$r_j=\Sigma^{N}<em>{i=1}[\beta*M</em>{ji}+{1-\beta}/N]*r_i$$  </p>
 <p>$$r_j=\Sigma^{N}<em>{i=1}\beta*M</em>{ji}<em>r_i+{1-\beta}/N</em>\Sigma^{N}_{i=1}r_i$$  </p>
