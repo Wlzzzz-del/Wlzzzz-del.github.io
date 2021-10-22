@@ -17,7 +17,7 @@
   <meta name="description" content="努力学习的小吴">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>浅谈PageRank算法以及实现 - Wlzzzz_blog</title>
+  <title>408 2009真题错题整理 - Wlzzzz_blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-30 16:23" pubdate>
-        April 30, 2021 pm
+      <time datetime="2021-10-22 13:00" pubdate>
+        October 22, 2021 pm
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      998 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      10
        分钟
     </span>
   
@@ -217,87 +217,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">浅谈PageRank算法以及实现</h1>
+            <h1 style="display: none">408 2009真题错题整理</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>网络就像是一张图，网页作为节点，链接作为边。当我们想要对网页进行排名，如此多的网页如何实现呢？于是google公司基于链接投票法开发了PageRank算法用于搜索引擎对网页进行排名。</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ul>
-<li>每个链接的投票作用于他的源页面</li>
-<li>如果页面$j$有$n$个出链，那么每个出链会获得$r_j/n$张票</li>
-<li>页面$j$的个人重要度是所有他的入链的票数之和<br>根据以上的理论基础我们可以推出:</li>
-<li>一张来自重要度很高的页面的票也同样很重要</li>
-<li>如果一个页面被其他重要度很高的页面所链接，那么这个页面的重要度也很高</li>
-</ul>
-<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>因此我们定义一个排名分数$r_j$作为页面$j$的排名分数:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>($d_i$指的是节点i的度)  </p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>(此处加入例子的图片page21)<br>在以上的图中，三个节点的分数$r_j$分别为<br>$$r_y = r_y/2+r_a/2$$  </p>
-<p>$$r_a=r_y/2+r_m$$</p>
-<p>$$r_m=r_a/2$$</p>
-<h1 id="基础公式"><a href="#基础公式" class="headerlink" title="基础公式"></a>基础公式</h1><p>知道了如何计算，我们应该抽象出适用于大型图计算的公式！  </p>
-<h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>随机矩阵$M$<br>假设网页$i$有$d_i$个出链<br>如果$i-&gt;j$ ,那么就设$M_{ji}=1/d_i$ 否则$M_{ji}=0$<br>M是一个随机矩阵，每一列的和为1<br>$r_i$是一列存储网页$i$重要性分数的向量<br>$$\Sigma_{i}r_i = 1$$<br>实际上$r$是$M$的特征向量<br>那么排名运算可以写成$r = M * r$<br>(此处加入例子图片page25)</p>
-<h1 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h1><ul>
-<li><strong><em>输入</em></strong>:  一个包含N个网页节点网络图的随机矩阵M</li>
-<li><strong><em>初始化分数矩阵</em></strong>:  $r^{0} = [1/N,…,1/N]^T$</li>
-<li><strong><em>循环计算</em></strong>:  $r^(t+1)=M*r^(t)$</li>
-<li><strong><em>直到收敛</em></strong>:  $|r^(t+1)-r^(t)|_1&lt;\epsilon$</li>
-<li><strong><em>输出r（排名结果）</em></strong></li>
-</ul>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>(此处加入p37图片)<br>以上就是PageRank算法的全部流程，但是实际上还存在一些问题</p>
-<h2 id="死胡同-dead-end"><a href="#死胡同-dead-end" class="headerlink" title="死胡同(dead end)"></a>死胡同(dead end)</h2><p>死胡同现象指的是一些网页不存在出链，这会导致：</p>
-<ol>
-<li>随机矩阵的步骤无处可去</li>
-<li>导致一些重要的网页分数$r_j$降低</li>
+              <h1 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h1><h2 id="08-B树"><a href="#08-B树" class="headerlink" title="08.B树"></a>08.B树</h2><p>记住阶数是指划分区间的个数，即根节点最多m-1个节点，最多m棵子树。</p>
+<h2 id="13-浮点数加减尾数对阶-难点）"><a href="#13-浮点数加减尾数对阶-难点）" class="headerlink" title="13.浮点数加减尾数对阶(难点）"></a>13.浮点数加减尾数对阶(难点）</h2><h2 id="31-软链接-硬链接"><a href="#31-软链接-硬链接" class="headerlink" title="31.软链接,硬链接"></a>31.软链接,硬链接</h2><p>软链接： 设置count引用计数器，用户不能直接删除索引节点，当count=0（即引用数为0）时由操作系统删除<br>**<em>硬链接**</em>:  直接创建一个Link文件（表面是文件，实际上保存着目标文件地址）指向目标文件，容易引发的问题：当被指向的文件被删除后，该地址有新的文件占用，该Link文件会打开错误的文件</p>
+<h2 id="29-SCAN调度"><a href="#29-SCAN调度" class="headerlink" title="29.SCAN调度"></a>29.SCAN调度</h2><p>磁盘磁头运动,SCAN选择当前最近的位置进行运动。<br>C-SCAN只允许磁头单方向运动，回返时直接返回起始端。</p>
+<h2 id="17-CISC与RISC"><a href="#17-CISC与RISC" class="headerlink" title="17.CISC与RISC"></a>17.CISC与RISC</h2><p>RISC精简指令，保留最基本的指令，指令较为简单，另外使用了pipeline技术，指令较为规整，因此使用硬布线技术。<br>ps：硬布线技术难以扩充指令集，微程序控制器很容易扩充指令集但执行速度较慢。</p>
+<h2 id="34-数据传输率问题"><a href="#34-数据传输率问题" class="headerlink" title="34.数据传输率问题"></a>34.数据传输率问题</h2><p>奈奎斯特定理：原始信号中的最大频率为f，那么采样频率f‘必须大于等于f的两倍，才能保证采样后的数字信号完整保留模拟信号。<br>换句话说，题目中给定的链路带宽计算时都必须除2再进行计算。</p>
+<h2 id="36-OSI模型"><a href="#36-OSI模型" class="headerlink" title="36.OSI模型"></a>36.OSI模型</h2><p>首先判断以太网交换机位于 <em>数据链路层</em>，数据链路层使用<em>物理地址</em>。又转发决策，因此使用的是目的物理地址。</p>
+<h2 id="37-CSMA-CD协议"><a href="#37-CSMA-CD协议" class="headerlink" title="37.CSMA/CD协议"></a>37.CSMA/CD协议</h2><p>(计网p91）<br>最小帧长公式：最小帧长=总线传播时延×数据传输速率×2<br>数据发送出去时发送端等待一段争用期，若超过这段争用期后无事发生，则可以继续发送;若在这段争用期内收到对方发送的信息，则说明刚才发送的信息在线路上因为碰撞而被丢弃，因此需要重新发送。<br>由于最小帧长变短了，会导致争用期比原始的更长，因此可以通过减小两端的距离保证争用期不变。</p>
+<h1 id="大题"><a href="#大题" class="headerlink" title="大题"></a>大题</h1><h2 id="41-算法证明题"><a href="#41-算法证明题" class="headerlink" title="41.算法证明题"></a>41.算法证明题</h2><p>对于该种题给出正确的结论十分重要，<strong>倘若结论不对则直接整道题0分。</strong><br>如何思考题中方法是否可行？<br>1.结合已学习过的算法<br>例如本题目中的最短路径算法,在数据结构已经学习过Prim算法，算法过程明显比题中所给出的算法更加复杂，因此题中所给算法必然是错误的。<br>2.举反例<br>以本题为例，举出一个满足拓扑排序的图实际上就能够反证明。<br>3.结合联想相关理论<br>本题中所给方法是贪心算法，得到结果实际上是局部最优，但局部最优并不一定是全局最优。  </p>
+<h2 id="42-算法题"><a href="#42-算法题" class="headerlink" title="42.算法题"></a>42.算法题</h2><ol>
+<li>题目中的条件尽可能高效的算法，表明了需要在时间、空间上都尽可能高效。 假如题设是时间上尽可能高效，则可以采用空间换时间的思想。</li>
+<li>在书写代码时，**<em>需要定义链表的数据结构。**</em></li>
+<li>详细实现步骤需要一步一步写明白（分点分步骤写，哪个条件跳转到哪步都要写）</li>
+<li>使用暴力法可以拿10分，不一定追求满分</li>
+<li>本题建立两个指针，第二个指针等第一个指针出发k个以后再出发。</li>
 </ol>
-<h2 id="蜘蛛陷阱"><a href="#蜘蛛陷阱" class="headerlink" title="蜘蛛陷阱"></a>蜘蛛陷阱</h2><p>蜘蛛陷阱是指所有的出链都在一个社区内，这会导致：</p>
-<ol>
-<li>随机矩阵运算时在社区内会大幅下降</li>
-<li>最终这个社区内的所有节点都有特别高的排名分数<br>实际上蜘蛛陷阱并不是一个问题，但他会对排名分数产生影响导致最终的排名不是我们所期望得到的..</li>
-</ol>
-<h2 id="解决蜘蛛陷阱问题"><a href="#解决蜘蛛陷阱问题" class="headerlink" title="解决蜘蛛陷阱问题"></a>解决蜘蛛陷阱问题</h2><p>(此处加入p40的图)<br>就像人们平时浏览网页一样，虽然一个网页有许多出链，但实际上并不会每个网页都浏览。虽然一个网页没有被链接，但是有可能会通过地址访问。<br>google解决蜘蛛陷阱的方法来源于此，在运算时加入随机参数$\beta$,对每个节点计算时:</p>
-<ul>
-<li>有$\beta$的概率浏览出链的网页</li>
-<li>有$1-\beta$的概率浏览非出链的网页  </li>
-<li>$\beta$介于0.8到0.9之间<br>通过调整后，一个社区内的节点也有可能在某次循环中访问到社区外的节点。</li>
-</ul>
-<h2 id="解决死胡同问题"><a href="#解决死胡同问题" class="headerlink" title="解决死胡同问题"></a>解决死胡同问题</h2><p>(此处加入p41的图）<br>对该矩阵$M$中该节点所在的行，给所有节点赋予$1/n$的值</p>
-<h2 id="公式的优化"><a href="#公式的优化" class="headerlink" title="公式的优化"></a>公式的优化</h2><p>那么基于以上两个问题的解决方法，我们可以推导出新的公式:<br>旧的计算公式:<br>$$r_j=\Sigma_{i-&gt;j}r_i/d_i$$<br>新的计算公式：<br>$$r_j=\Sigma_{i-&gt;j}\beta*r_i/d_i+(1-\beta)*1/N$$  </p>
-<p>于是我们得出一个新的矩阵 </p>
-<p>$$A=\beta<em>M+(1- \beta )$$<br><em>M+(1-\beta)</em>(1/N)_{N</em>N}</p>
-<p>因此我们计算时只需要循环计算  </p>
-<p>$$r=A*r$$  </p>
-<p>最终收敛即可得到结果  </p>
-<h1 id="实际运算该如何优化算法"><a href="#实际运算该如何优化算法" class="headerlink" title="实际运算该如何优化算法"></a>实际运算该如何优化算法</h1><p>那么google是如何进行实际的运算呢?整个算法最核心的步骤就是**<em>矩阵乘法**</em>。<br>如果我们有足够大的内存空间可以存取矩阵 $A,r^{old},r^{new}$.<br>假设我们有一个包含10亿个节点的矩阵  </p>
-<ul>
-<li>我们需要四位用来存储每个记录</li>
-<li>对于矩阵来说有20亿个记录，需要8GB</li>
-<li>矩阵$A$需要存储$N^2$个记录,$10^18$如此庞大的数据内存根本装不下。</li>
-</ul>
-<h2 id="从算法公式对算法进行优化"><a href="#从算法公式对算法进行优化" class="headerlink" title="从算法公式对算法进行优化"></a>从算法公式对算法进行优化</h2><p>$$r = A<em>r, A_{ji}=\Beta</em>M_{ji}+{1-\Beta}/N$$  </p>
-<p>$$r_j=\Sigma^{N}<em>{i=1}A</em>{ji}*r_i$$  </p>
-<p>$$r_j=\Sigma^{N}<em>{i=1}[\Beta*M</em>{ji}+{1-\Beta}/N]*r_i$$  </p>
-<p>$$r_j=\Sigma^{N}<em>{i=1}\Beta*M</em>{ji}<em>r_i+{1-\Beta}/N</em>\Sigma^{N}_{i=1}r_i$$  </p>
-<p>$$r_j=\Sigma^{N}<em>{i=1}\Beta*M</em>{ji}<em>r_i+{1-\Beta}/N</em>$$  </p>
-<p>通过推导我们将公式化简为</p>
-<p>$$r=\Beta<em>M</em>r+[{1-\Beta}/N]_N$$  </p>
-<p>在新的公式中，我们只需  </p>
-<ul>
-<li>计算 $r^{new}=\Beta<em>M</em>r^{old}$  </li>
-<li>把 $r^{new}$加上$(1-\beta)/N$<br>但即使是优化到如此地步，我们仍然需要足够的内存能够存储$M$矩阵。那么我们能不能对$M$矩阵的存储进行优化？</li>
-</ul>
-<h2 id="M-矩阵的优化"><a href="#M-矩阵的优化" class="headerlink" title="$M$矩阵的优化"></a>$M$矩阵的优化</h2><p>原始的$M$矩阵类似于邻接矩阵，我们只需要$o(1)$的时间复杂度就可以判断某个边是否存在,但是我们算法的核心并不在于此,因此我们需要对数据结构进行修改。<br>(插入优化图p52)<br>实际上我们只需要存储节点的源、度、目标三个数据即可，因此我们用一个$N*3$的矩阵存储这些数据,第一维度存储source，第二维度存储degree，第三维度存储destination.<br>在这样的数据结构下，算法的流程可以写成:</p>
-<ol>
-<li>初始化所有节点的$r^{new}=(1-\beta)/N$</li>
-<li>对每个节点: </li>
-</ol>
-<ul>
-<li>将source,degree,destination读入内存</li>
-<li>对每个destination:</li>
-<li>计算$r^{new}(dest_j) += \beta*r^{old}(i)/d_j$  </li>
-</ul>
-<p>但是由于数据量过大，即便是这样的矩阵存储，我们也没有足够的RAM可以用来存放。  </p>
-<h2 id="如何解决存放的问题？"><a href="#如何解决存放的问题？" class="headerlink" title="如何解决存放的问题？"></a>如何解决存放的问题？</h2><p>由于内存空间不足，我们可以将数据存放在磁盘，并且在算法需要读取时使用读取函数进行访问和修改。<br>但是随之而来的问题是，如此庞大的数据文件如果进行频繁的读写实际上效率非常低,主要是因为每次访问都需要重新打开文件，并且访问到其他不需要的节点。</p>
-<h2 id="解决读写效率低的问题"><a href="#解决读写效率低的问题" class="headerlink" title="解决读写效率低的问题"></a>解决读写效率低的问题</h2><p>我们可以对硬盘上的数据文件按照编号分块存储，以此提高读写速度和减少不必要的浪费。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>随机生成使用1 000/ 10 000/ 100 000个节点的图，每个节点随机地赋予6-16的出度  </p>
-<h2 id="仓库地址"><a href="#仓库地址" class="headerlink" title="仓库地址"></a>仓库地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/Wlzzzz-del/PageRank">我的github仓库</a><br>在pagerank.py中没有对数据结构进行优化，仅存放在RAM上。<br>在new_pagerank1.py中我将表写入本地的json文件，每2000/100个节点的信息存为一个json文件（根据节点的多少修改）。<br>在算法执行的loop阶段使用函数对json文件进行读写。<br>原算法执行10000个节点运算需要大概几个小时，优化后10000个节点只需要26s.  </p>
+<h2 id="45-PV操作"><a href="#45-PV操作" class="headerlink" title="45.PV操作"></a>45.PV操作</h2><h2 id="46-虚拟内存"><a href="#46-虚拟内存" class="headerlink" title="46.虚拟内存"></a>46.虚拟内存</h2><h2 id="47-路由表"><a href="#47-路由表" class="headerlink" title="47.路由表"></a>47.路由表</h2><p>1.将所划分局域网填入路由表中时，目地网络IP填写主机地址，即全0地址。（全1代表广播，全0表示网络本身）</p>
 
             </div>
             <hr>
@@ -308,9 +246,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C/">复杂网络</a>
+                      <a class="hover-with-bg" href="/tags/408/">408</a>
                     
                   </div>
                 
@@ -323,18 +259,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/22/2009/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">408 2009真题错题整理</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/25/%E4%BD%BF%E7%94%A8selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E7%99%BB%E9%99%86tb%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%96%84%EF%BC%89/">
-                        <span class="hidden-mobile">使用selenium自动化登陆tb</span>
+                      <a href="/2021/04/30/google-PageRank%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">
+                        <span class="hidden-mobile">浅谈PageRank算法以及实现</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -503,7 +433,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "浅谈PageRank算法以及实现&nbsp;",
+        "408 2009真题错题整理&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
