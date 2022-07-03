@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.9k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      23
        分钟
     </span>
   
@@ -366,6 +366,23 @@ b.reset();<span class="hljs-comment">// 可以通过</span>
 <li>非常大的函数，超过20行</li>
 <li>递归调用的函数（因为递归本身就需要用到栈)</li>
 </ol>
+<h1 id="const"><a href="#const" class="headerlink" title="const"></a>const</h1><h2 id="const值的使用"><a href="#const值的使用" class="headerlink" title="const值的使用"></a>const值的使用</h2><pre><code class="hljs C++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> class_size =<span class="hljs-number">12</span>;
+<span class="hljs-keyword">int</span> finalGrad[class_size];<span class="hljs-comment">// OK</span>
+
+<span class="hljs-keyword">int</span> x;
+<span class="hljs-built_in">cin</span>&gt;&gt;x;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> size = x;
+<span class="hljs-keyword">double</span> classAverage[size];<span class="hljs-comment">// error</span></code></pre>
+<p>为什么当const需要cin时不能成为数组长度的变量？<br>因为声明一个数组时，编译器需要知道该数组明确的长度，才能够在堆栈区给出足够大的预留空间，该段代码中的x需要cin给出值，因此是不确定的数不能作为数组的长度。</p>
+<h2 id="const指针的含义"><a href="#const指针的含义" class="headerlink" title="const指针的含义"></a>const指针的含义</h2><pre><code class="hljs C++"><span class="hljs-keyword">char</span> * <span class="hljs-keyword">const</span> q = <span class="hljs-string">&quot;abc&quot;</span>;<span class="hljs-comment">// 指针q是const</span>
+*q = <span class="hljs-string">&#x27;C&#x27;</span>;<span class="hljs-comment">// OK,指针所指向的内存块的内容可以改变</span>
+q++; <span class="hljs-comment">// 指针的值不能改变</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *p = <span class="hljs-string">&quot;ABCD&quot;</span>;
+<span class="hljs-comment">// (*p) 是一个const的char类型变量</span>
+*p = <span class="hljs-string">&quot;D&quot;</span>;<span class="hljs-comment">//error</span>
+p++;<span class="hljs-comment">// legal</span></code></pre>
+<p><a href="const%E7%9A%84%E5%90%AB%E4%B9%89%E6%98%AF%E6%8C%87%EF%BC%9A%E4%B8%8D%E8%83%BD%E9%80%9A%E8%BF%87%E8%AF%A5%E5%8F%98%E9%87%8F%E6%94%B9%E5%8F%98%E8%AF%A5%E5%86%85%E5%AD%98%E5%9D%97%E7%9A%84%E5%80%BC%E3%80%82">const的含义是指：不能通过该变量改变该内存块的值。</a></p>
 
             </div>
             <hr>
@@ -388,6 +405,12 @@ b.reset();<span class="hljs-comment">// 可以通过</span>
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/07/03/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">我的大学四年</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
