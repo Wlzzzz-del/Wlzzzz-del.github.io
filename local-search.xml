@@ -4,13 +4,38 @@
   
   
   <entry>
+    <title>密码学笔记</title>
+    <link href="/2022/07/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    <url>/2022/07/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>分组密码将明文消息编码表示后的二进制序列划分成固定大小的块, 每块分别在密钥的控制下变换成等长的二进制密文。</p><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>分组密码设计时应该满足以下要求</p><ul><li>分组长度足够长，以防止明文穷举攻击</li><li>密钥长度要适宜，不能过长也不能过短。过长不利于管理，过短容易受到密钥穷举攻击</li><li>置换算法应足够复杂</li><li>加密和解密运算简单，易于实现</li><li>明文和密文长度相同</li></ul><h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><ul><li>扩散  </li></ul><p>扩散是指密文中的任一比特都要和明文与密钥的每一比特相关联。<br>以p1、p2表示明文，c1、c2表示密文，则:  </p><pre><code class="hljs dts"><span class="hljs-comment">/*** 无扩散技术的加密算法 ***/</span><span class="hljs-symbol">p1:</span> <span class="hljs-number">00000000</span><span class="hljs-symbol">c1:</span> xxxxx001<span class="hljs-comment">// p1加密之后</span><span class="hljs-symbol">p2:</span> <span class="hljs-number">00000001</span><span class="hljs-comment">// p2加密之后</span><span class="hljs-symbol">c2:</span> xxxxx011<span class="hljs-comment">/*** 有扩散技术的加密算法 ***/</span><span class="hljs-symbol">p1:</span> <span class="hljs-number">00000000</span><span class="hljs-symbol">c1:</span> <span class="hljs-number">01011101</span><span class="hljs-comment">// p1加密之后</span><span class="hljs-symbol">p2:</span> <span class="hljs-number">00000001</span><span class="hljs-symbol">c2:</span> <span class="hljs-number">11101011</span><span class="hljs-comment">// p2加密之后</span></code></pre><ul><li>混乱  </li></ul><p>混乱是指加密变换中明文、密钥以及密文之间的关系要尽可能的复杂，防止破译攻击。同时要求达到混乱目的的操作要可逆，即明文混乱之后能得到密文。</p><ul><li>乘积密码体制  </li></ul><p>乘积密码体制可以理解为一种由多个具有混乱和扩散特征的操作**<em>迭代**</em>作用于明文的密码体制,迭代次数越多，密码分析越困难.</p><h2 id="几种迭代机构"><a href="#几种迭代机构" class="headerlink" title="几种迭代机构"></a>几种迭代机构</h2><h3 id="Feistel网络"><a href="#Feistel网络" class="headerlink" title="Feistel网络"></a>Feistel网络</h3><h4 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h4><p>以F表示轮函数，$K_0$,$K_1$……代表第1，2,…n+1轮的子密钥。基本加密流程如下：</p><ol><li>将明文分为两块 $(L_0,R_0)$</li><li>对每一轮，$i=0,1…,n$<br>  $L_{i+1} = R_i$<br>  $R_{i+1}=L_i \oplus F(R_i,K_i)$</li><li>加密后的密文为$(R_{n+1},L_{n+1})$</li></ol><p>基本解密流程如下：  </p><ol><li>对于密文$(R_{n+1},L_{n+1})$，每一轮，i=n,n-1…0<br>  $R_i = L_{i+1}$<br>  $L_i = R_{i+1} \oplus F(L_{i+1},K_i)$</li><li>得出密文$(L_0,R_0)$<h4 id="雪崩效应"><a href="#雪崩效应" class="headerlink" title="雪崩效应"></a>雪崩效应</h4>输入即使只有很小的变化，也会导致输出产生巨大变化.假设轮函数的输入最右边1比特变化，至少影响轮函数输出2比特变化。<h4 id="非平衡的Feistel密码"><a href="#非平衡的Feistel密码" class="headerlink" title="非平衡的Feistel密码"></a>非平衡的Feistel密码</h4>在Feistel原来的基础上修改，$L_0$和$R_0$为长度不等的明文块。<br>Throp shuffle就是一种不平衡的Feistel结构密码，分块的一边只有一比特。</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>密码学</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>我的大学四年</title>
     <link href="/2022/07/03/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4/"/>
     <url>/2022/07/03/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="前记"><a href="#前记" class="headerlink" title="前记"></a>前记</h1><p>当我们想到生命总会如草如花有凋零的一天，把那些不好的习惯赶快改掉，该享受生活就享受生活吧，每一天好好过的生活才是自己的。</p><h1 id="高考结束"><a href="#高考结束" class="headerlink" title="高考结束"></a>高考结束</h1><p>2018年6月，结束了高三奋斗的日子。<br>我的叔叔听闻我考入大学的消息，很高兴的送了我得到App上吴军老师的网课，在那里我读到了这句话，可以说这句话一直影响我到现在…</p><p>在结束了三年的艰苦奋斗后，我急切地想拥有自己的电脑和智能手机，于是我迫不及待地选择了出去打工。</p><p>第一份工作是在我叔的汽配零件厂里，叔叔说一天算我一百块，从早上八点干到中午十二点，再从下午两点干到五点半。<br>年轻的我觉得这份差事还不错，于是欣然地开始打工了。头一天由于新鲜感仍然存在，我对工作内容还不至于厌恶。但是到了第二天第三天，我开始产生了烦躁…<br>由于周围打工的人与我的年龄并不相仿，我难以找到共同工作的团队。并且流水线的工作内容极其枯燥而乏味，每天都要忍受着亚硝酸盐的不堪味道。于是我便开始怀念读书的时光。</p><p>在坚持了半个月后，我便辞去了这份工作，拿着工资与我爸补贴我的一点资金，换了一部新的手机。</p><p>第二份工作是在当地的牛排店当服务员，负责端牛排，一个月的工资是1800。在我作为顾客时，我总是对服务员十分宽容，并不责备他们。然而当我作为服务员时，才能感受到人与人之间的不同。第一次是有一位顾客点了一份牛排，当我端着牛排放到他面前的桌子上时。他指着牛排质问我，为什么菜单上的牛排没有骨头，端上来的牛排却有骨头。我一下子乱了阵脚，只能急忙叫来了经理。第二次是由于我自己的工作失误，端错了客人的牛排，于是我被带我的人指着鼻子大骂，本来微不足道的月薪又被扣钱了。在干了两三天之后，我和一起去的小伙伴便提桶跑路了。</p><p>第三份工作是送美团外卖，收入与工作时间比起前两份工作都相当地友好。然而由于是暑假，我不得不每天中午顶着大太阳出去送外卖。一单的价格一般是四到五元，当天比较热或者下雨时会有天气补贴，有一次中午实在热得受不了，但是我还是忍住不去买水喝。一瓶矿泉水得送一单才能挣得上，实在是感受到了赚钱的辛苦。在干了一个月之后我便不再继续。</p><p>后来假期结束，便是我和我姑丈一块来到我的母校，因为学校在北方我的家在南方，所以我爸妈就没有一起过来。一开始录取的专业是石油工程，在从市区到学校路上路过了油田，我自己就心想以后绝对不会想在这里工作。从那时起便下定了转专业的心。</p><h1 id="大一"><a href="#大一" class="headerlink" title="大一"></a>大一</h1><h1 id="大二"><a href="#大二" class="headerlink" title="大二"></a>大二</h1><h1 id="大三"><a href="#大三" class="headerlink" title="大三"></a>大三</h1><p>用一句话概括我的大三，那就是“浑身解数但没什么用”。由于大一大二的佛系摆烂，我保研已然无望。但在经过大二的实验室经历后，我仍然想要使自己的能力更进一步。于是我找到了我的战友们小齐和小陈一起做项目。<br>我们做的是医学图像识别的项目，第一次拿着做好的东西去找阎老师自荐时，阎老师十分高兴地答应了做我们的导师，并且帮我们指出了不足之处。然而，初次投稿挑战杯竟然连校级都没有入围。不甘心的我们准备再次冲击大创项目。大创与挑战杯有所不同，挑战杯项目更加偏向于学术科研，而大创更加强调商业价值。因此在写项目书时，我们找了几个经管院的同学对原来的项目进行修修改改，最终将项目再次提交。<br>然而，大创的结果也不尽如人意。</p><h1 id="大四"><a href="#大四" class="headerlink" title="大四"></a>大四</h1>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>生活</tag>
+      
+    </tags>
     
   </entry>
   
